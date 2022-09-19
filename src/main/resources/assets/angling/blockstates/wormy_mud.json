@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "worms=1": {
+      "model": "angling:block/wormy_mud_1"
+    },
+    "worms=2": {
+      "model": "angling:block/wormy_mud_2"
+    },
+    "worms=3": {
+      "model": "angling:block/wormy_mud_3"
+    }
+  }
+}

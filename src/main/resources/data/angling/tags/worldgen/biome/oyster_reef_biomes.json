@@ -1,0 +1,12 @@
+{
+  "values": [
+    "minecraft:stony_shore",
+    "minecraft:snowy_beach",
+    "minecraft:ocean",
+    "minecraft:deep_ocean",
+    "minecraft:cold_ocean",
+    "minecraft:deep_cold_ocean",
+    "minecraft:frozen_ocean",
+    "minecraft:deep_frozen_ocean"
+  ]
+}

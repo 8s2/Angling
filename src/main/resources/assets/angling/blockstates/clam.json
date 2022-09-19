@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "angling:block/clam",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "angling:block/clam"
+    },
+    "facing=south": {
+      "model": "angling:block/clam",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "angling:block/clam",
+      "y": 270
+    }
+  }
+}

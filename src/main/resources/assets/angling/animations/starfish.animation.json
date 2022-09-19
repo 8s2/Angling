@@ -1,0 +1,212 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.starfish.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"arm_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [-1.5, 0, 0]
+						},
+						"2.0": {
+							"vector": [1.5, 0, 0],
+							"easing": "linear"
+						},
+						"4.0": {
+							"vector": [-1.5, 0, 0],
+							"easing": "linear"
+						}
+					}
+				},
+				"arm_2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 72, 0]
+						},
+						"1.0": {
+							"vector": [-1.5, 72, 0],
+							"easing": "linear"
+						},
+						"3.0": {
+							"vector": [1.5, 72, 0],
+							"easing": "linear"
+						},
+						"4.0": {
+							"vector": [0, 72, 0],
+							"easing": "linear"
+						}
+					}
+				},
+				"arm_3": {
+					"rotation": {
+						"0.0": {
+							"vector": [0.5, 144, 0]
+						},
+						"0.6667": {
+							"vector": [1.5, 144, 0],
+							"easing": "linear"
+						},
+						"2.6667": {
+							"vector": [-1.5, 144, 0],
+							"easing": "linear"
+						},
+						"4.0": {
+							"vector": [0.5, 144, 0],
+							"easing": "linear"
+						}
+					}
+				},
+				"arm_4": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, -144, 0]
+						},
+						"1.0": {
+							"vector": [1.5, -144, 0]
+						},
+						"3.0": {
+							"vector": [-1.5, -144, 0]
+						},
+						"4.0": {
+							"vector": [0, -144, 0]
+						}
+					}
+				},
+				"arm_5": {
+					"rotation": {
+						"0.0": {
+							"vector": [1.5, -72, 0]
+						},
+						"2.0": {
+							"vector": [-1.5, -72, 0]
+						},
+						"4.0": {
+							"vector": [1.5, -72, 0]
+						}
+					}
+				}
+			}
+		},
+		"animation.starfish.ambient": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"arm_1": {
+					"rotation": {
+						"0.0": {
+							"vector": [-1.5, 0, 0]
+						},
+						"2.0": {
+							"vector": [1.5, 0, 0],
+							"easing": "linear"
+						},
+						"4.0": {
+							"vector": [-1.5, 0, 0],
+							"easing": "linear"
+						}
+					}
+				},
+				"arm_2": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 72, 0]
+						},
+						"1.0": {
+							"vector": [-1.5, 72, 0],
+							"easing": "linear"
+						},
+						"3.0": {
+							"vector": [1.5, 72, 0],
+							"easing": "linear"
+						},
+						"4.0": {
+							"vector": [0, 72, 0],
+							"easing": "linear"
+						}
+					}
+				},
+				"arm_3": {
+					"rotation": {
+						"0.0": {
+							"vector": [0.5, 144, 0]
+						},
+						"0.6667": {
+							"vector": [1.5, 144, 0],
+							"easing": "linear"
+						},
+						"2.6667": {
+							"vector": [-1.5, 144, 0],
+							"easing": "linear"
+						},
+						"4.0": {
+							"vector": [0.5, 144, 0],
+							"easing": "linear"
+						}
+					}
+				},
+				"arm_4": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, -144, 0]
+						},
+						"1.0": {
+							"vector": [1.5, -144, 0]
+						},
+						"3.0": {
+							"vector": [-1.5, -144, 0]
+						},
+						"4.0": {
+							"vector": [0, -144, 0]
+						}
+					}
+				},
+				"arm_5": {
+					"rotation": {
+						"0.0": {
+							"vector": [1.5, -72, 0]
+						},
+						"2.0": {
+							"vector": [-1.5, -72, 0]
+						},
+						"4.0": {
+							"vector": [1.5, -72, 0]
+						}
+					}
+				}
+			}
+		},
+		"animation.starfish.dead": {
+			"loop": true,
+			"bones": {
+				"arm_1": {
+					"rotation": {
+						"vector": [-1, 0, 0]
+					}
+				},
+				"arm_2": {
+					"rotation": {
+						"vector": [-1, 72, 0]
+					}
+				},
+				"arm_3": {
+					"rotation": {
+						"vector": [-1, 144, 0]
+					}
+				},
+				"arm_4": {
+					"rotation": {
+						"vector": [-1, -144, 0]
+					}
+				},
+				"arm_5": {
+					"rotation": {
+						"vector": [-1, -72, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

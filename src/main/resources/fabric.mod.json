@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "angling",
+  "version": "${version}",
+
+  "name": "Angling Mod",
+  "description": "FISH!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/angling/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.eightsidedsquare.angling.core.AnglingMod"
+    ],
+    "client": [
+      "com.eightsidedsquare.angling.client.AnglingClient"
+    ],
+    "cardinal-components-entity": [
+      "com.eightsidedsquare.angling.cca.AnglingEntityComponents"
+    ],
+    "preLaunch": [
+      "com.eightsidedsquare.angling.core.AnglingPreLaunch"
+    ]
+  },
+  "mixins": [
+    "angling.mixins.json"
+  ],
+  "accessWidener": "angling.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "custom": {
+    "cardinal-components": [
+      "angling:fish_spawning"
+    ]
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

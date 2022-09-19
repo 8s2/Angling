@@ -1,0 +1,38 @@
+{
+  "parent": "angling:husbandry/obtain_roe",
+  "criteria": {
+    "sea_slug_eggs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angling:sea_slug_eggs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.obtain_sea_slug_eggs.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "angling:sea_slug_eggs",
+      "nbt": "{BlockEntityTag:{Color:7294519}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.obtain_sea_slug_eggs.title"
+    }
+  },
+  "requirements": [
+    [
+      "sea_slug_eggs"
+    ]
+  ]
+}

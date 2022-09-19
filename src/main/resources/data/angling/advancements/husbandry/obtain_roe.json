@@ -1,0 +1,38 @@
+{
+  "parent": "angling:husbandry/put_worm_in_block",
+  "criteria": {
+    "roe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "angling:roe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.obtain_roe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "angling:roe",
+      "nbt": "{BlockEntityTag:{PrimaryColor:16739110,SecondaryColor:16739110}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.obtain_roe.title"
+    }
+  },
+  "requirements": [
+    [
+      "roe"
+    ]
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:husbandry/tactical_fishing",
+  "criteria": {
+    "traded_with_pelican": {
+      "conditions": {},
+      "trigger": "angling:traded_with_pelican"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.traded_with_pelican.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:salmon_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.traded_with_pelican.title"
+    }
+  },
+  "requirements": [
+    [
+      "traded_with_pelican"
+    ]
+  ]
+}

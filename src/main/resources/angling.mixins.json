@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.eightsidedsquare.angling.mixin",
+  "plugin": "com.eightsidedsquare.angling.core.AnglingMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CoralFeatureMixin",
+    "EntityBucketItemMixin",
+    "FishEntityMixin",
+    "FishEntityMixin$SwimToRandomPlaceGoalMixin",
+    "FollowGroupLeaderGoalMixin",
+    "SchoolingFishEntityMixin",
+    "TadpoleEntityMixin"
+  ],
+  "client": [
+    "FluidRendererMixin",
+    "integration.SodiumFluidRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:husbandry/fishy_business",
+  "criteria": {
+    "look_at_nautilus": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "looking_at": {
+                  "type": "angling:nautilus"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.look_at_nautilus.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "angling:nautilus_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.look_at_nautilus.title"
+    }
+  },
+  "requirements": [
+    [
+      "look_at_nautilus"
+    ]
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "item.worm.use": {
+    "sounds": [
+      {
+        "name": "angling:item/worm/use1"
+      },
+      {
+        "name": "angling:item/worm/use2"
+      }
+    ],
+    "subtitle": "subtitles.item.worm.use"
+  },
+  "block.shell.break": {
+    "sounds": [
+      {
+        "name": "mob/turtle/egg/jump_egg1",
+        "volume": 0.85
+      },
+      {
+        "name": "mob/turtle/egg/jump_egg2",
+        "volume": 0.85
+      },
+      {
+        "name": "mob/turtle/egg/jump_egg3",
+        "volume": 0.85
+      },
+      {
+        "name": "mob/turtle/egg/jump_egg4",
+        "volume": 0.85
+      }
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.shell.fall": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ]
+  },
+  "block.shell.hit": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.shell.place": {
+    "sounds": [
+      {
+        "name": "mob/turtle/egg/jump_egg1",
+        "volume": 0.85
+      },
+      {
+        "name": "mob/turtle/egg/jump_egg2",
+        "volume": 0.85
+      },
+      {
+        "name": "mob/turtle/egg/jump_egg3",
+        "volume": 0.85
+      },
+      {
+        "name": "mob/turtle/egg/jump_egg4",
+        "volume": 0.85
+      }
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.shell.step": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.roe.hatch": {
+    "sounds": [
+      {
+        "name": "block/frogspawn/hatch1",
+        "pitch": 1.2,
+        "volume": 0.6
+      },
+      {
+        "name": "block/frogspawn/hatch2",
+        "pitch": 1.2,
+        "volume": 0.6
+      },
+      {
+        "name": "block/frogspawn/hatch3",
+        "pitch": 1.2,
+        "volume": 0.6
+      },
+      {
+        "name": "block/frogspawn/hatch4",
+        "pitch": 1.2,
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.block.roe.hatch"
+  },
+  "block.sea_slug_eggs.hatch": {
+    "sounds": [
+      {
+        "name": "block/frogspawn/hatch1",
+        "pitch": 1.2,
+        "volume": 0.6
+      },
+      {
+        "name": "block/frogspawn/hatch2",
+        "pitch": 1.2,
+        "volume": 0.6
+      },
+      {
+        "name": "block/frogspawn/hatch3",
+        "pitch": 1.2,
+        "volume": 0.6
+      },
+      {
+        "name": "block/frogspawn/hatch4",
+        "pitch": 1.2,
+        "volume": 0.6
+      }
+    ],
+    "subtitle": "subtitles.block.sea_slug_eggs.hatch"
+  },
+  "entity.fry.death": {
+    "sounds": [
+      "mob/tadpole/death1",
+      "mob/tadpole/death2"
+    ],
+    "subtitle": "subtitles.entity.fry.death"
+  },
+  "entity.fry.flop": {
+    "sounds": [
+      {
+        "name": "entity.tropical_fish.flop",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.fry.flop"
+  },
+  "entity.fry.hurt": {
+    "sounds": [
+      "mob/tadpole/hurt1",
+      "mob/tadpole/hurt2",
+      "mob/tadpole/hurt3",
+      "mob/tadpole/hurt4"
+    ],
+    "subtitle": "subtitles.entity.fry.hurt"
+  },
+  "entity.sunfish.death": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.sunfish.death"
+  },
+  "entity.sunfish.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.sunfish.flop"
+  },
+  "entity.sunfish.hurt": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.sunfish.hurt"
+  },
+  "entity.nautilus.hurt": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ],
+    "subtitle": "subtitles.entity.nautilus.hurt"
+  },
+  "entity.nautilus.death": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ],
+    "subtitle": "subtitles.entity.nautilus.death"
+  },
+  "entity.pelican.hurt": {
+    "sounds": [
+      "angling:entity/pelican/hurt1",
+      "angling:entity/pelican/hurt2",
+      "angling:entity/pelican/hurt3",
+      "angling:entity/pelican/hurt4"
+    ],
+    "subtitle": "subtitles.entity.pelican.hurt"
+  },
+  "entity.pelican.death": {
+    "sounds": [
+      "angling:entity/pelican/hurt1",
+      "angling:entity/pelican/hurt2",
+      "angling:entity/pelican/hurt3",
+      "angling:entity/pelican/hurt4"
+    ],
+    "subtitle": "subtitles.entity.pelican.death"
+  },
+  "entity.pelican.ambient": {
+    "sounds": [
+      "angling:entity/pelican/ambient1",
+      "angling:entity/pelican/ambient2",
+      "angling:entity/pelican/ambient3",
+      "angling:entity/pelican/ambient4"
+    ],
+    "subtitle": "subtitles.entity.pelican.ambient"
+  },
+  "entity.sea_slug.death": {
+    "sounds": [
+      "mob/tadpole/death1",
+      "mob/tadpole/death2"
+    ],
+    "subtitle": "subtitles.entity.sea_slug.death"
+  },
+  "entity.sea_slug.hurt": {
+    "sounds": [
+      "mob/tadpole/hurt1",
+      "mob/tadpole/hurt2",
+      "mob/tadpole/hurt3",
+      "mob/tadpole/hurt4"
+    ],
+    "subtitle": "subtitles.entity.sea_slug.hurt"
+  },
+  "entity.crab.hurt": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ],
+    "subtitle": "subtitles.entity.crab.hurt"
+  },
+  "entity.crab.death": {
+    "sounds": [
+      "angling:block/shell/step1",
+      "angling:block/shell/step2",
+      "angling:block/shell/step3",
+      "angling:block/shell/step4"
+    ],
+    "subtitle": "subtitles.entity.crab.death"
+  }
+}

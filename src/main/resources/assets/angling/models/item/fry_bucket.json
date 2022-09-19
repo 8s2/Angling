@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "angling:item/fry_bucket",
+    "layer1": "angling:item/fry_bucket_overlay"
+  }
+}

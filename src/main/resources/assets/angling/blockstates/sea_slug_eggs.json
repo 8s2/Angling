@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+	  {
+	    "model": "angling:block/sea_slug_eggs"
+	  },
+	  {
+	    "model": "angling:block/sea_slug_eggs",
+	    "y": 90
+	  },
+	  {
+	    "model": "angling:block/sea_slug_eggs",
+	    "y": 180
+	  },
+	  {
+	    "model": "angling:block/sea_slug_eggs",
+	    "y": 270
+	  }
+	]
+  }
+}

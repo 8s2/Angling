@@ -1,0 +1,112 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 7, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 5, 0],
+					"cubes": [
+						{"origin": [-4, 5, -9], "size": [8, 7, 12], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 9, 3],
+					"cubes": [
+						{"origin": [-3, 4, 3], "size": [6, 6, 3], "uv": [20, 55]}
+					]
+				},
+				{
+					"name": "neck",
+					"parent": "body",
+					"pivot": [0, 11.5, -6.5],
+					"cubes": [
+						{"origin": [-1.5, 10, -8], "size": [3, 11, 3], "uv": [38, 55]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "neck",
+					"pivot": [0, 20, -6.5]
+				},
+				{
+					"name": "head_joint",
+					"parent": "head",
+					"pivot": [0, 20, -6.5],
+					"cubes": [
+						{"origin": [-2, 20, -10.5], "size": [4, 3, 6], "inflate": 0.01, "uv": [0, 55]}
+					]
+				},
+				{
+					"name": "beak",
+					"parent": "head_joint",
+					"pivot": [0, 22, -10.5]
+				},
+				{
+					"name": "beak_top",
+					"parent": "beak",
+					"pivot": [0, 22.5, -10.5],
+					"cubes": [
+						{"origin": [-2, 22, -23.5], "size": [4, 1, 13], "uv": [34, 40]}
+					]
+				},
+				{
+					"name": "beak_bottom",
+					"parent": "beak",
+					"pivot": [0, 21.5, -10.5],
+					"cubes": [
+						{"origin": [-2, 20, -23.5], "size": [4, 2, 13], "uv": [0, 40]},
+						{"origin": [0, 16, -23.5], "size": [0, 4, 16], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "left_wing",
+					"parent": "body",
+					"pivot": [4, 10, -6],
+					"cubes": [
+						{"origin": [4, 6, -8], "size": [1, 6, 14], "uv": [0, 20]}
+					]
+				},
+				{
+					"name": "right_wing",
+					"parent": "body",
+					"pivot": [-4, 10, -6],
+					"cubes": [
+						{"origin": [-5, 6, -8], "size": [1, 6, 14], "uv": [30, 20]}
+					]
+				},
+				{
+					"name": "right_leg",
+					"parent": "root",
+					"pivot": [-2.5, 5, 0],
+					"cubes": [
+						{"origin": [-4, 0, -4], "size": [3, 5, 4], "uv": [64, 55]}
+					]
+				},
+				{
+					"name": "left_leg",
+					"parent": "root",
+					"pivot": [2.5, 5, 0],
+					"cubes": [
+						{"origin": [1, 0, -4], "size": [3, 5, 4], "uv": [50, 55]}
+					]
+				}
+			]
+		}
+	]
+}

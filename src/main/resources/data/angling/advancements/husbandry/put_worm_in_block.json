@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "put_worm_in_block": {
+      "conditions": {
+        "item": {
+          "items": [
+            "angling:worm"
+          ]
+        },
+        "location": {
+          "block": {
+            "blocks": [
+              "minecraft:dirt",
+              "minecraft:mud",
+              "angling:wormy_dirt",
+              "angling:wormy_mud"
+            ]
+          }
+        }
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.put_worm_in_block.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "angling:worm"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.put_worm_in_block.title"
+    }
+  },
+  "requirements": [
+    [
+      "put_worm_in_block"
+    ]
+  ]
+}
