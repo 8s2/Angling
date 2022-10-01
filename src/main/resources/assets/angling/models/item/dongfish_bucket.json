@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "angling:item/dongfish_bucket"
+  },
+  "overrides": [
+      {
+        "predicate": {
+          "angling:has_horngus": 0
+        },
+        "model": "angling:item/dongfish_bucket_no_horngus"
+      },
+      {
+        "predicate": {
+          "angling:has_horngus": 1
+        },
+        "model": "angling:item/dongfish_bucket_horngus"
+      }
+    ]
+}

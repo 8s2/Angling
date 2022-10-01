@@ -19,14 +19,20 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TropicalFishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.core.util.Color;
+
+import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
 public class AnglingClient implements ClientModInitializer {
     @Override
@@ -39,6 +45,8 @@ public class AnglingClient implements ClientModInitializer {
         EntityRendererRegistry.register(AnglingEntities.PELICAN, PelicanEntityRenderer::new);
         EntityRendererRegistry.register(AnglingEntities.NAUTILUS, NautilusEntityRenderer::new);
         EntityRendererRegistry.register(AnglingEntities.SEA_SLUG, SeaSlugEntityRenderer::new);
+        EntityRendererRegistry.register(AnglingEntities.CRAB, CrabEntityRenderer::new);
+        EntityRendererRegistry.register(AnglingEntities.DONGFISH, DongfishEntityRenderer::new);
 
         BlockEntityRendererRegistry.register(AnglingEntities.STARFISH, StarfishBlockEntityRenderer::new);
         if(FabricLoader.getInstance().isModLoaded("sodium")) {
@@ -60,6 +68,14 @@ public class AnglingClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(AnglingParticles.ALGAE, AlgaeParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(AnglingParticles.WORM, WormParticle.Factory::new);
 
+        ModelPredicateProviderRegistry.register(AnglingItems.DONGFISH_BUCKET, new Identifier(MOD_ID, "has_horngus"), this::dongfishBucketItemHasHorngus);
+
+
+    }
+
+    private float dongfishBucketItemHasHorngus(ItemStack stack, ClientWorld clientWorld, LivingEntity livingEntity, int i) {
+        NbtCompound nbt = stack.getOrCreateNbt();
+        return !nbt.contains("HasHorngus") || nbt.getBoolean("HasHorngus") ? 1 : 0;
 
     }
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "angling:item/dongfish_bucket_no_horngus"
+  }
+}

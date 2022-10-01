@@ -23,6 +23,7 @@ public class AnglingItems {
     public static final Item NAUTILUS_SPAWN_EGG = create("nautilus_spawn_egg", new SpawnEggItem(AnglingEntities.NAUTILUS, 0xd4ccc3, 0xae4635, new Item.Settings().group(ItemGroup.MISC)));
     public static final Item SEA_SLUG_SPAWN_EGG = create("sea_slug_spawn_egg", new SpawnEggItem(AnglingEntities.SEA_SLUG, 0x6f4e37, 0xff3800, new Item.Settings().group(ItemGroup.MISC)));
     public static final Item CRAB_SPAWN_EGG = create("crab_spawn_egg", new SpawnEggItem(AnglingEntities.CRAB, 0xbf4927, 0x798696, new Item.Settings().group(ItemGroup.MISC)));
+    public static final Item DONGFISH_SPAWN_EGG = create("dongfish_spawn_egg", new SpawnEggItem(AnglingEntities.DONGFISH, 0x9f6060, 0xd3d1ad, new Item.Settings().group(ItemGroup.MISC)));
     public static final Item ROE = create("roe", new BlockItem(AnglingBlocks.ROE, new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
     public static final Item SEA_SLUG_EGGS = create("sea_slug_eggs", new BlockItem(AnglingBlocks.SEA_SLUG_EGGS, new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
     public static final Item DUCKWEED = create("duckweed", new PlaceableOnWaterItem(AnglingBlocks.DUCKWEED, new Item.Settings().group(ItemGroup.DECORATIONS)));
@@ -31,6 +32,7 @@ public class AnglingItems {
     public static final Item FRY_BUCKET = create("fry_bucket", new EntityBucketItem(AnglingEntities.FRY, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
     public static final Item SEA_SLUG_BUCKET = create("sea_slug_bucket", new EntityBucketItem(AnglingEntities.SEA_SLUG, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
     public static final Item CRAB_BUCKET = create("crab_bucket", new EntityBucketItem(AnglingEntities.CRAB, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
+    public static final Item DONGFISH_BUCKET = create("dongfish_bucket", new EntityBucketItem(AnglingEntities.DONGFISH, Fluids.WATER, SoundEvents.ITEM_BUCKET_EMPTY_FISH, new Item.Settings().group(ItemGroup.MISC).maxCount(1)));
     public static final Item WORM = create("worm", new WormItem(new Item.Settings().group(ItemGroup.MISC)));
     public static final Item SUNFISH = create("sunfish", new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(2).saturationModifier(0.2f).build())));
     public static final Item FRIED_SUNFISH = create("fried_sunfish", new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(6).saturationModifier(0.9f).build())));

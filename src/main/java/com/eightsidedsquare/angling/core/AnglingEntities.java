@@ -114,9 +114,21 @@ public class AnglingEntities {
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(CrabEntity::new)
                     .defaultAttributes(CrabEntity::createAttributes)
-                    .dimensions(EntityDimensions.fixed(0.8f, 0.4f))
-                    .spawnGroup(SpawnGroup.WATER_CREATURE)
+                    .dimensions(EntityDimensions.changing(0.7f, 0.4f))
+                    .spawnGroup(SpawnGroup.CREATURE)
                     .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrabEntity::canSpawn)
+                    .build()
+    );
+
+    public static final EntityType<DongfishEntity> DONGFISH = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "dongfish"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(DongfishEntity::new)
+                    .defaultAttributes(FishEntity::createFishAttributes)
+                    .dimensions(EntityDimensions.fixed(0.4f, 0.3f))
+                    .spawnGroup(SpawnGroup.WATER_AMBIENT)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WaterCreatureEntity::canSpawn)
                     .build()
     );
 
@@ -135,7 +147,7 @@ public class AnglingEntities {
         );
         BiomeModifications.addSpawn(
                 biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.CRAB_SPAWN_IN),
-                SpawnGroup.WATER_CREATURE, CRAB, 5, 1, 3
+                SpawnGroup.CREATURE, CRAB, 8, 3, 5
         );
     }
 

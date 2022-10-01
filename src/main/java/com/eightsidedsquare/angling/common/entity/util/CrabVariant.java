@@ -1,5 +1,6 @@
 package com.eightsidedsquare.angling.common.entity.util;
 
+import com.eightsidedsquare.angling.core.tags.AnglingBiomeTags;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.minecraft.entity.data.TrackedDataHandler;
@@ -7,19 +8,20 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
-public record CrabVariant(Identifier texture) {
+public record CrabVariant(Identifier texture, TagKey<Biome> biomeTag) {
 
     private static final Map<CrabVariant, Identifier> VARIANTS = new LinkedHashMap<>();
 
-    public static final CrabVariant DUNGENESS = create("dungeness");
-    public static final CrabVariant GHOST = create("ghost");
-    public static final CrabVariant BLUE_CLAW = create("blue_claw");
+    public static final CrabVariant DUNGENESS = create("dungeness", AnglingBiomeTags.DUNGENESS_CRAB_BIOMES);
+    public static final CrabVariant GHOST = create("ghost", AnglingBiomeTags.GHOST_CRAB_BIOMES);
+    public static final CrabVariant BLUE_CLAW = create("blue_claw", AnglingBiomeTags.BLUE_CLAW_CRAB_BIOMES);
 
     public static final Registry<CrabVariant> REGISTRY = FabricRegistryBuilder
             .createDefaulted(CrabVariant.class, new Identifier(MOD_ID, "crab_variant"), new Identifier(MOD_ID, "dungeness"))
@@ -43,8 +45,8 @@ public record CrabVariant(Identifier texture) {
         return REGISTRY.get(id);
     }
 
-    private static CrabVariant create(String name) {
-        CrabVariant pattern = new CrabVariant(new Identifier(MOD_ID, "textures/entity/crab/" + name + ".png"));
+    private static CrabVariant create(String name, TagKey<Biome> biomeTag) {
+        CrabVariant pattern = new CrabVariant(new Identifier(MOD_ID, "textures/entity/crab/" + name + ".png"), biomeTag);
         VARIANTS.put(pattern, new Identifier(MOD_ID, name));
         return pattern;
     }

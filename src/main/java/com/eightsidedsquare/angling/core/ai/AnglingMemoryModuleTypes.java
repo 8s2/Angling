@@ -19,8 +19,4 @@ public class AnglingMemoryModuleTypes {
     private static <U> MemoryModuleType<U> register(String id, Codec<U> codec) {
         return Registry.register(Registry.MEMORY_MODULE_TYPE, new Identifier(MOD_ID, id), new MemoryModuleType<>(Optional.of(codec)));
     }
-
-    private static <U> MemoryModuleType<U> register(String id) {
-        return Registry.register(Registry.MEMORY_MODULE_TYPE, new Identifier(MOD_ID, id), new MemoryModuleType<>(Optional.empty()));
-    }
 }

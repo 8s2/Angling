@@ -82,10 +82,7 @@ public class AnglingUtil {
     }
 
     public static boolean isReloadingResources() {
-        if(MinecraftClient.getInstance().getOverlay() instanceof SplashOverlay splashOverlay) {
-            return splashOverlay.reloading;
-        }
-        return false;
+        return MinecraftClient.getInstance().getOverlay() instanceof SplashOverlay splashOverlay && splashOverlay.reloading;
     }
 
 }

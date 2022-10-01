@@ -16,7 +16,7 @@ public class SunfishEntityRenderer extends GeoEntityRenderer<SunfishEntity> {
     }
 
     @Override
-    public RenderLayer getRenderType(SunfishEntity animatable, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
-        return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
+    public RenderLayer getRenderType(SunfishEntity entity, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
+        return RenderLayer.getEntityTranslucent(getTextureResource(entity));
     }
 }

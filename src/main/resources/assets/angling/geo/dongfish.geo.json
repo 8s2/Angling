@@ -1,0 +1,69 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, -1]
+				},
+				{
+					"name": "head",
+					"parent": "root",
+					"pivot": [0, 1, 0],
+					"cubes": [
+						{"origin": [-1, 0, -4], "size": [2, 2, 4], "uv": [0, 8]}
+					]
+				},
+				{
+					"name": "right_fin",
+					"parent": "head",
+					"pivot": [-1, 0, -1.5],
+					"cubes": [
+						{"origin": [-2, 0, -2], "size": [1, 0, 1], "uv": [0, 8]}
+					]
+				},
+				{
+					"name": "left_fin",
+					"parent": "head",
+					"pivot": [1, 0, -1.5],
+					"cubes": [
+						{"origin": [1, 0, -2], "size": [1, 0, 1], "uv": [8, 0]}
+					]
+				},
+				{
+					"name": "scungle",
+					"parent": "head",
+					"pivot": [0, 0, -1],
+					"cubes": [
+						{"origin": [-0.5, -3, -1], "size": [1, 3, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "horngus",
+					"parent": "scungle",
+					"pivot": [0, -3, -1],
+					"cubes": [
+						{"origin": [-1.5, -6, -2.5], "size": [3, 3, 3], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "root",
+					"pivot": [0, 1, 0],
+					"cubes": [
+						{"origin": [0, 0, 0], "size": [0, 2, 6], "uv": [0, 0]}
+					]
+				}
+			]
+		}
+	]
+}

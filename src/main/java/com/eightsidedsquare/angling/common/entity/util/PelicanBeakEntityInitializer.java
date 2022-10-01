@@ -36,6 +36,7 @@ public abstract class PelicanBeakEntityInitializer {
         registerInitializer(EntityType.BEE, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.TURTLE, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.TADPOLE, SIMPLE_INITIALIZER);
+        registerInitializer(AnglingEntities.DONGFISH, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.PUFFERFISH, new PelicanBeakEntityInitializer() {
             @Override
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {

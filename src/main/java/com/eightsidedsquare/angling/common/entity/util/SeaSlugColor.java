@@ -35,6 +35,7 @@ public record SeaSlugColor(int color) {
     public static final SeaSlugColor AMBER = create("amber", 0xFF7E00);
     public static final SeaSlugColor IRIS = create("iris", 0x5A4FCF);
     public static final SeaSlugColor ORCHID = create("orchid", 0xDA70D6D);
+    public static final SeaSlugColor FOLLY = create("folly", 0xFF004A);
 
     public static final Registry<SeaSlugColor> REGISTRY = FabricRegistryBuilder
             .createDefaulted(SeaSlugColor.class, new Identifier(MOD_ID, "sea_slug_color"), new Identifier(MOD_ID, "ivory"))

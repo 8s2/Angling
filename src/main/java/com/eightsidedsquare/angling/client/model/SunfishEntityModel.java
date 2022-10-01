@@ -12,7 +12,7 @@ import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
 public class SunfishEntityModel extends AnimatedGeoModel<SunfishEntity> {
     @Override
-    public Identifier getModelResource(SunfishEntity object) {
+    public Identifier getModelResource(SunfishEntity entity) {
         return new Identifier(MOD_ID, "geo/sunfish.geo.json");
     }
 
@@ -23,7 +23,7 @@ public class SunfishEntityModel extends AnimatedGeoModel<SunfishEntity> {
     }
 
     @Override
-    public Identifier getAnimationResource(SunfishEntity animatable) {
+    public Identifier getAnimationResource(SunfishEntity entity) {
         return new Identifier(MOD_ID, "animations/sunfish.animation.json");
     }
 

@@ -94,6 +94,8 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
                 entity.setPos(vec3d.x, vec3d.y, vec3d.z);
                 entity.setBodyYaw(getHeadYaw());
                 entity.setYaw(getHeadYaw());
+                if(entity instanceof Bucketable bucketable)
+                    bucketable.setFromBucket(true);
                 world.spawnEntity(entity);
             });
             setEntityInBeak(nbt);
@@ -368,6 +370,11 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
     @Override
     protected Brain<?> deserializeBrain(Dynamic<?> dynamic) {
         return PelicanBrain.create(createBrainProfile().deserialize(dynamic));
+    }
+
+    @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return !(hasCustomName() || isPersistent());
     }
 
     @Override

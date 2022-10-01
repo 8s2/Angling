@@ -36,6 +36,10 @@ public class AnglingSounds {
     public static final SoundEvent ENTITY_SEA_SLUG_DEATH = create("entity.sea_slug.death");
     public static final SoundEvent ENTITY_CRAB_HURT = create("entity.crab.hurt");
     public static final SoundEvent ENTITY_CRAB_DEATH = create("entity.crab.death");
+    public static final SoundEvent ENTITY_DONGFISH_HURT = create("entity.dongfish.hurt");
+    public static final SoundEvent ENTITY_DONGFISH_DEATH = create("entity.dongfish.death");
+    public static final SoundEvent ENTITY_DONGFISH_FLOP = create("entity.dongfish.flop");
+    public static final SoundEvent ENTITY_DONGFISH_SHEAR = create("entity.dongfish.shear");
 
     public static final BlockSoundGroup SHELL_SOUND_GROUP = new BlockSoundGroup(1, 1.25f, BLOCK_SHELL_BREAK, BLOCK_SHELL_STEP, BLOCK_SHELL_PLACE, BLOCK_SHELL_HIT, BLOCK_SHELL_FALL);
 

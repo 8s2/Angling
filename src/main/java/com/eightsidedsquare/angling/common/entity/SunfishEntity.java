@@ -118,8 +118,7 @@ public class SunfishEntity extends SchoolingFishEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData animationData) {
-        AnimationController<SunfishEntity> controller = new AnimationController<>(this, "controller", 2, this::controller);
-        animationData.addAnimationController(controller);
+        animationData.addAnimationController(new AnimationController<>(this, "controller", 2, this::controller));
     }
 
     private PlayState controller(AnimationEvent<SunfishEntity> event) {

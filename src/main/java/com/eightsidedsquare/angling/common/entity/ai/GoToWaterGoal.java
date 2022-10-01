@@ -17,7 +17,7 @@ public class GoToWaterGoal extends MoveToTargetPosGoal {
 
     @Override
     protected int getInterval(PathAwareEntity mob) {
-        return 1;
+        return toGoalTicks(20 + mob.getRandom().nextInt(20));
     }
 
     @Override

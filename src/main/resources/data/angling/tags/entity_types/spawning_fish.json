@@ -4,6 +4,7 @@
     "minecraft:salmon",
     "minecraft:pufferfish",
     "minecraft:tropical_fish",
-	"angling:sunfish"
+	"angling:sunfish",
+	"angling:dongfish"
   ]
 }

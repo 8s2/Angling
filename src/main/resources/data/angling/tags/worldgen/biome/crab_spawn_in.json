@@ -1,6 +1,7 @@
 {
   "values": [
-    "minecraft:beach",
-    "minecraft:mangrove_swamp"
+    "#angling:dungeness_crab_biomes",
+    "#angling:ghost_crab_biomes",
+    "#angling:blue_claw_crab_biomes"
   ]
 }
