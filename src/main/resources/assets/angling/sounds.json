@@ -301,6 +301,40 @@
   },
   "entity.dongfish.death": {
     "sounds": [
+      "mob/tadpole/death1",
+      "mob/tadpole/death2"
+    ],
+    "subtitle": "subtitles.entity.dongfish.death"
+  },
+  "entity.dongfish.flop": {
+    "sounds": [
+      {
+        "name": "entity.tropical_fish.flop",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.dongfish.flop"
+  },
+  "entity.dongfish.hurt": {
+    "sounds": [
+      "mob/tadpole/hurt1",
+      "mob/tadpole/hurt2",
+      "mob/tadpole/hurt3",
+      "mob/tadpole/hurt4"
+    ],
+    "subtitle": "subtitles.entity.dongfish.hurt"
+  },
+  "entity.dongfish.shear": {
+    "sounds": [
+      {
+        "name": "mob/sheep/shear",
+        "pitch": 2
+      }
+    ],
+    "subtitle": "subtitles.entity.dongfish.shear"
+  },
+  "entity.catfish.death": {
+    "sounds": [
       {
         "name": "entity/fish/hurt1",
         "pitch": 0.8
@@ -318,9 +352,9 @@
         "pitch": 0.8
       }
     ],
-    "subtitle": "subtitles.entity.dongfish.death"
+    "subtitle": "subtitles.entity.catfish.death"
   },
-  "entity.dongfish.flop": {
+  "entity.catfish.flop": {
     "sounds": [
       {
         "name": "entity/fish/flop1",
@@ -343,9 +377,9 @@
         "volume": 0.3
       }
     ],
-    "subtitle": "subtitles.entity.dongfish.flop"
+    "subtitle": "subtitles.entity.catfish.flop"
   },
-  "entity.dongfish.hurt": {
+  "entity.catfish.hurt": {
     "sounds": [
       {
         "name": "entity/fish/hurt1",
@@ -364,15 +398,299 @@
         "pitch": 0.8
       }
     ],
-    "subtitle": "subtitles.entity.dongfish.hurt"
+    "subtitle": "subtitles.entity.catfish.hurt"
   },
-  "entity.dongfish.shear": {
+  "entity.seahorse.death": {
     "sounds": [
       {
-        "name": "mob/sheep/shear",
-        "pitch": 2
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
       }
     ],
-    "subtitle": "subtitles.entity.dongfish.shear"
+    "subtitle": "subtitles.entity.seahorse.death"
+  },
+  "entity.seahorse.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.seahorse.flop"
+  },
+  "entity.seahorse.hurt": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.seahorse.hurt"
+  },
+  "entity.bubble_eye.death": {
+    "sounds": [
+      "mob/tadpole/death1",
+      "mob/tadpole/death2"
+    ],
+    "subtitle": "subtitles.entity.bubble_eye.death"
+  },
+  "entity.bubble_eye.flop": {
+    "sounds": [
+      {
+        "name": "entity.tropical_fish.flop",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.entity.bubble_eye.flop"
+  },
+  "entity.bubble_eye.hurt": {
+    "sounds": [
+      "mob/tadpole/hurt1",
+      "mob/tadpole/hurt2",
+      "mob/tadpole/hurt3",
+      "mob/tadpole/hurt4"
+    ],
+    "subtitle": "subtitles.entity.bubble_eye.hurt"
+  },
+  "entity.anomalocaris.death": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.anomalocaris.death"
+  },
+  "entity.anomalocaris.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.anomalocaris.flop"
+  },
+  "entity.anomalocaris.hurt": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.anomalocaris.hurt"
+  },
+  "entity.anglerfish.death": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.anglerfish.death"
+  },
+  "entity.anglerfish.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.anglerfish.flop"
+  },
+  "entity.anglerfish.hurt": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.anglerfish.hurt"
+  },
+  "entity.mahi_mahi.death": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.mahi_mahi.death"
+  },
+  "entity.mahi_mahi.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.mahi_mahi.flop"
+  },
+  "entity.mahi_mahi.hurt": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.mahi_mahi.hurt"
   }
 }

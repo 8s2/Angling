@@ -36,7 +36,16 @@ public abstract class PelicanBeakEntityInitializer {
         registerInitializer(EntityType.BEE, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.TURTLE, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.TADPOLE, SIMPLE_INITIALIZER);
-        registerInitializer(AnglingEntities.DONGFISH, SIMPLE_INITIALIZER);
+        registerInitializer(AnglingEntities.DONGFISH, new PelicanBeakEntityInitializer() {
+            @Override
+            public NbtCompound initialize(NbtCompound nbt, Random random, World world) {
+                nbt.putBoolean("HasHorngus", true);
+                return nbt;
+            }
+        });
+        registerInitializer(AnglingEntities.CATFISH, SIMPLE_INITIALIZER);
+        registerInitializer(AnglingEntities.SEAHORSE, SIMPLE_INITIALIZER);
+        registerInitializer(AnglingEntities.BUBBLE_EYE, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.PUFFERFISH, new PelicanBeakEntityInitializer() {
             @Override
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {

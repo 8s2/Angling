@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FacingBlock;
+import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -30,6 +31,9 @@ public abstract class CoralFeatureMixin {
                                 AnglingBlocks.STARFISH.getDefaultState().with(FacingBlock.FACING, d), Block.NOTIFY_LISTENERS);
                         StarfishBlock.randomize(world, pos.offset(d), random);
                     });
+            if(random.nextFloat() < 0.01f && canPlace(pos.up(), world)) {
+                world.setBlockState(pos.up(), AnglingBlocks.ANEMONE.getDefaultState().with(Properties.WATERLOGGED, true), Block.NOTIFY_LISTENERS);
+            }
         }
     }
 

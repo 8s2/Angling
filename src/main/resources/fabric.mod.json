@@ -6,11 +6,12 @@
   "name": "Angling Mod",
   "description": "FISH!",
   "authors": [
-    "Me!"
+    "EightSidedSquare",
+    "Diansu",
+    "Sillvia"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://eightsidedsquare.com/"
   },
 
   "license": "CC0-1.0",
@@ -48,6 +49,5 @@
     ]
   },
   "suggests": {
-    "another-mod": "*"
   }
 }

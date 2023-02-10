@@ -1,5 +1,8 @@
 package com.eightsidedsquare.angling.client;
 
+import com.eightsidedsquare.angling.client.model.CrabEntityModel;
+import com.eightsidedsquare.angling.client.model.DongfishEntityModel;
+import com.eightsidedsquare.angling.client.model.SunfishEntityModel;
 import com.eightsidedsquare.angling.client.particle.AlgaeParticle;
 import com.eightsidedsquare.angling.client.particle.WormParticle;
 import com.eightsidedsquare.angling.client.renderer.*;
@@ -37,18 +40,30 @@ import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 public class AnglingClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), AnglingBlocks.ROE, AnglingBlocks.DUCKWEED, AnglingBlocks.OYSTERS, AnglingBlocks.CLAM, AnglingBlocks.SEA_SLUG_EGGS);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
+                AnglingBlocks.ROE, AnglingBlocks.DUCKWEED,
+                AnglingBlocks.OYSTERS, AnglingBlocks.CLAM,
+                AnglingBlocks.SEA_SLUG_EGGS, AnglingBlocks.PAPYRUS,
+                AnglingBlocks.SARGASSUM);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), AnglingBlocks.ALGAE);
 
         EntityRendererRegistry.register(AnglingEntities.FRY, FryEntityRenderer::new);
-        EntityRendererRegistry.register(AnglingEntities.SUNFISH, SunfishEntityRenderer::new);
+        EntityRendererRegistry.register(AnglingEntities.SUNFISH, BasicEntityRenderer.create(new SunfishEntityModel()));
         EntityRendererRegistry.register(AnglingEntities.PELICAN, PelicanEntityRenderer::new);
         EntityRendererRegistry.register(AnglingEntities.NAUTILUS, NautilusEntityRenderer::new);
         EntityRendererRegistry.register(AnglingEntities.SEA_SLUG, SeaSlugEntityRenderer::new);
-        EntityRendererRegistry.register(AnglingEntities.CRAB, CrabEntityRenderer::new);
-        EntityRendererRegistry.register(AnglingEntities.DONGFISH, DongfishEntityRenderer::new);
+        EntityRendererRegistry.register(AnglingEntities.CRAB, BasicEntityRenderer.create(new CrabEntityModel()));
+        EntityRendererRegistry.register(AnglingEntities.DONGFISH, BasicEntityRenderer.create(new DongfishEntityModel()));
+        EntityRendererRegistry.register(AnglingEntities.CATFISH, BasicEntityRenderer.create("catfish", true));
+        EntityRendererRegistry.register(AnglingEntities.SEAHORSE, BasicEntityRenderer.create("seahorse", true, "head"));
+        EntityRendererRegistry.register(AnglingEntities.BUBBLE_EYE, BasicEntityRenderer.create("bubble_eye", true));
+        EntityRendererRegistry.register(AnglingEntities.ANOMALOCARIS, BasicEntityRenderer.create("anomalocaris", false, "head"));
+        EntityRendererRegistry.register(AnglingEntities.ANGLERFISH, AnglerfishEntityRenderer::new);
+        EntityRendererRegistry.register(AnglingEntities.MAHI_MAHI, BasicEntityRenderer.create("mahi_mahi", true));
 
         BlockEntityRendererRegistry.register(AnglingEntities.STARFISH, StarfishBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(AnglingEntities.ANEMONE, AnemoneBlockEntityRenderer::new);
+        BlockEntityRendererRegistry.register(AnglingEntities.URCHIN, UrchinBlockEntityRenderer::new);
         if(FabricLoader.getInstance().isModLoaded("sodium")) {
             BlockEntityRendererRegistry.register(AnglingEntities.ROE, RoeBlockEntityRenderer::new);
             BlockEntityRendererRegistry.register(AnglingEntities.SEA_SLUG_EGGS, SeaSlugEggsBlockEntityRenderer::new);
@@ -69,7 +84,6 @@ public class AnglingClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(AnglingParticles.WORM, WormParticle.Factory::new);
 
         ModelPredicateProviderRegistry.register(AnglingItems.DONGFISH_BUCKET, new Identifier(MOD_ID, "has_horngus"), this::dongfishBucketItemHasHorngus);
-
 
     }
 

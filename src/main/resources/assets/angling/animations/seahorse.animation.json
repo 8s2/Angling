@@ -1,0 +1,56 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.seahorse.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"head": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time*90)*2.5+2.5", 0, 0]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time*90+40)*-5", 0, 0]
+					}
+				},
+				"tail": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time*90+20)*-10", 0, 0]
+					}
+				},
+				"fin": {
+					"rotation": {
+						"vector": [0, "math.sin(query.anim_time*720)*22.5", 0]
+					}
+				}
+			}
+		},
+		"animation.seahorse.flop": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"root": {
+					"rotation": {
+						"0.0": {
+							"vector": [-15, 0, 0]
+						},
+						"0.25": {
+							"vector": [15, 0, 0],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [-15, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					},
+					"position": {
+						"vector": [0, -6, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

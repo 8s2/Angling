@@ -1,0 +1,54 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.seahorse",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 6, 0]
+				},
+				{
+					"name": "head",
+					"parent": "root",
+					"pivot": [0, 8, 0],
+					"cubes": [
+						{"origin": [0, 8, -4], "size": [0, 3, 5], "uv": [0, 0]},
+						{"origin": [-1, 8, -2], "size": [2, 2, 3], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 8, 0],
+					"cubes": [
+						{"origin": [-1, 4, 0], "size": [2, 4, 2], "inflate": 0.01, "uv": [8, 6]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 4, 2],
+					"cubes": [
+						{"origin": [0, 0, -3], "size": [0, 4, 5], "uv": [0, 7]}
+					]
+				},
+				{
+					"name": "fin",
+					"parent": "body",
+					"pivot": [0, 6, 2],
+					"cubes": [
+						{"origin": [0, 4, 2], "size": [0, 4, 1], "uv": [10, 11]}
+					]
+				}
+			]
+		}
+	]
+}

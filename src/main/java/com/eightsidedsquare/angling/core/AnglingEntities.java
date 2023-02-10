@@ -48,6 +48,24 @@ public class AnglingEntities {
                     .build()
     );
 
+    public static final BlockEntityType<AnemoneBlockEntity> ANEMONE = Registry.register(
+            Registry.BLOCK_ENTITY_TYPE,
+            new Identifier(MOD_ID, "anemone"),
+            FabricBlockEntityTypeBuilder
+                    .create(AnemoneBlockEntity::new)
+                    .addBlock(AnglingBlocks.ANEMONE)
+                    .build()
+    );
+
+    public static final BlockEntityType<UrchinBlockEntity> URCHIN = Registry.register(
+            Registry.BLOCK_ENTITY_TYPE,
+            new Identifier(MOD_ID, "urchin"),
+            FabricBlockEntityTypeBuilder
+                    .create(UrchinBlockEntity::new)
+                    .addBlock(AnglingBlocks.URCHIN)
+                    .build()
+    );
+
     public static final EntityType<FryEntity> FRY = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(MOD_ID, "fry"),
@@ -132,6 +150,78 @@ public class AnglingEntities {
                     .build()
     );
 
+    public static final EntityType<CatfishEntity> CATFISH = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "catfish"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(CatfishEntity::new)
+                    .defaultAttributes(FishEntity::createFishAttributes)
+                    .dimensions(EntityDimensions.fixed(0.6f, 0.4f))
+                    .spawnGroup(SpawnGroup.WATER_AMBIENT)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WaterCreatureEntity::canSpawn)
+                    .build()
+    );
+
+    public static final EntityType<SeahorseEntity> SEAHORSE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "seahorse"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(SeahorseEntity::new)
+                    .defaultAttributes(FishEntity::createFishAttributes)
+                    .dimensions(EntityDimensions.fixed(0.35f, 0.6f))
+                    .spawnGroup(SpawnGroup.WATER_AMBIENT)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WaterCreatureEntity::canSpawn)
+                    .build()
+    );
+
+    public static final EntityType<BubbleEyeEntity> BUBBLE_EYE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "bubble_eye"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(BubbleEyeEntity::new)
+                    .defaultAttributes(FishEntity::createFishAttributes)
+                    .dimensions(EntityDimensions.fixed(0.4f, 0.3f))
+                    .spawnGroup(SpawnGroup.WATER_AMBIENT)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WaterCreatureEntity::canSpawn)
+                    .build()
+    );
+
+    public static final EntityType<AnomalocarisEntity> ANOMALOCARIS = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "anomalocaris"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(AnomalocarisEntity::new)
+                    .defaultAttributes(FishEntity::createFishAttributes)
+                    .dimensions(EntityDimensions.fixed(0.8f, 0.3f))
+                    .spawnGroup(SpawnGroup.UNDERGROUND_WATER_CREATURE)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnomalocarisEntity::canSpawn)
+                    .build()
+    );
+
+    public static final EntityType<AnglerfishEntity> ANGLERFISH = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "anglerfish"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(AnglerfishEntity::new)
+                    .defaultAttributes(FishEntity::createFishAttributes)
+                    .dimensions(EntityDimensions.fixed(0.8f, 0.5f))
+                    .spawnGroup(SpawnGroup.WATER_AMBIENT)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, NautilusEntity::canSpawn)
+                    .build()
+    );
+
+    public static final EntityType<MahiMahiEntity> MAHI_MAHI = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(MOD_ID, "mahi_mahi"),
+            FabricEntityTypeBuilder.createMob()
+                    .entityFactory(MahiMahiEntity::new)
+                    .defaultAttributes(MahiMahiEntity::createAttributes)
+                    .dimensions(EntityDimensions.fixed(1f, 0.8f))
+                    .spawnGroup(SpawnGroup.WATER_AMBIENT)
+                    .spawnRestriction(SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FishEntity::canSpawn)
+                    .build()
+    );
+
     public static void init() {
         BiomeModifications.addSpawn(
                 biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.SUNFISH_SPAWN_IN),
@@ -146,8 +236,32 @@ public class AnglingEntities {
                 SpawnGroup.WATER_AMBIENT, NAUTILUS, 12, 1, 3
         );
         BiomeModifications.addSpawn(
+                biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.CATFISH_SPAWN_IN),
+                SpawnGroup.WATER_AMBIENT, CATFISH, 1, 1, 2
+        );
+        BiomeModifications.addSpawn(
                 biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.CRAB_SPAWN_IN),
                 SpawnGroup.CREATURE, CRAB, 8, 3, 5
+        );
+        BiomeModifications.addSpawn(
+                biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.SEAHORSE_SPAWN_IN),
+                SpawnGroup.WATER_AMBIENT, SEAHORSE, 4, 3, 8
+        );
+        BiomeModifications.addSpawn(
+                biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.BUBBLE_EYE_SPAWN_IN),
+                SpawnGroup.WATER_AMBIENT, BUBBLE_EYE, 4, 2, 3
+        );
+        BiomeModifications.addSpawn(
+                biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.ANOMALOCARIS_SPAWN_IN),
+                SpawnGroup.UNDERGROUND_WATER_CREATURE, ANOMALOCARIS, 20, 1, 2
+        );
+        BiomeModifications.addSpawn(
+                biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.ANGLERFISH_SPAWN_IN),
+                SpawnGroup.WATER_AMBIENT, ANGLERFISH, 6, 1, 2
+        );
+        BiomeModifications.addSpawn(
+                biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.MAHI_MAHI_SPAWN_IN),
+                SpawnGroup.WATER_AMBIENT, MAHI_MAHI, 4, 1, 2
         );
     }
 

@@ -41,6 +41,7 @@ public class DongfishEntity extends FishEntity implements IAnimatable {
         if(hasHorngus() && stack.isOf(Items.SHEARS)) {
             playSound(AnglingSounds.ENTITY_DONGFISH_SHEAR, 1, 1);
             setHasHorngus(false);
+            damage(DamageSource.player(player), 1);
             if(!player.getAbilities().creativeMode)
                 stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
             return ActionResult.success(world.isClient);

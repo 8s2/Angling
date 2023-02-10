@@ -29,6 +29,7 @@ public abstract class FishVariantInheritance {
         registerVariantInheritance(EntityType.COD, SIMPLE_INHERITANCE);
         registerVariantInheritance(EntityType.SALMON, SIMPLE_INHERITANCE);
         registerVariantInheritance(EntityType.PUFFERFISH, SIMPLE_INHERITANCE);
+        registerVariantInheritance(AnglingEntities.DONGFISH, SIMPLE_INHERITANCE);
         registerVariantInheritance(EntityType.TROPICAL_FISH, new FishVariantInheritance() {
             @Override
             protected NbtCompound getChild(NbtCompound parent, NbtCompound mate, NbtCompound child, World world) {

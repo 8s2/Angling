@@ -1,6 +1,6 @@
 package com.eightsidedsquare.angling.client.renderer;
 
-import com.eightsidedsquare.angling.client.model.PelicanEntityModel;
+import com.eightsidedsquare.angling.client.model.BasicEntityModel;
 import com.eightsidedsquare.angling.common.entity.PelicanEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -10,15 +10,13 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 import software.bernie.geckolib3.util.RenderUtils;
 
-public class PelicanEntityRenderer extends GeoEntityRenderer<PelicanEntity> {
+public class PelicanEntityRenderer extends BasicEntityRenderer<PelicanEntity> {
 
     private final EntityRenderDispatcher entityRenderDispatcher;
     @Nullable
@@ -26,7 +24,7 @@ public class PelicanEntityRenderer extends GeoEntityRenderer<PelicanEntity> {
     private VertexConsumerProvider vertexConsumerProvider;
 
     public PelicanEntityRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new PelicanEntityModel());
+        super(ctx, new BasicEntityModel<>("pelican", false, "head_joint"));
         entityRenderDispatcher = ctx.getRenderDispatcher();
         this.shadowRadius = 0.35f;
     }
@@ -74,11 +72,6 @@ public class PelicanEntityRenderer extends GeoEntityRenderer<PelicanEntity> {
         }
 
         super.renderRecursively(bone, stack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
-
-    @Override
-    public RenderLayer getRenderType(PelicanEntity animatable, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
-        return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
     }
 
 

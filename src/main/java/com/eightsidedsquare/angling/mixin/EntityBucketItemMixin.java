@@ -53,8 +53,8 @@ public abstract class EntityBucketItemMixin {
                         tooltip.add(Text.translatable("item.angling.sea_slug_bucket.bioluminescent").formatted(formatting));
                 }
             }else if(entityType.equals(AnglingEntities.CRAB)) {
-                if(nbt.contains("BucketVariantTag", NbtElement.STRING_TYPE)) {
-                    CrabVariant variant = CrabVariant.fromId(nbt.getString("BucketVariantTag"));
+                if(nbt.contains("Variant", NbtElement.STRING_TYPE)) {
+                    CrabVariant variant = CrabVariant.fromId(nbt.getString("Variant"));
                     tooltip.add(Text.translatable(variant.getTranslationKey()).formatted(formatting));
                 }
             }

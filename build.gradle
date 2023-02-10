@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -15,15 +15,8 @@ loom {
 }
 
 repositories {
-	maven {
-		name = 'Ladysnake Mods'
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
-	}
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-	maven {
-		name "jitpack"
-		url "https://jitpack.io"
-	}
+
 	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
@@ -31,9 +24,20 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
+	maven {
+		name "jitpack"
+		url "https://jitpack.io"
+	}
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
+	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
 }
 
 dependencies {
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.5'
+
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -42,17 +46,17 @@ dependencies {
 
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.5'
 
-	implementation "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
-	annotationProcessor "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
-	include "com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"
-
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
 	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 
-	modCompileOnly "maven.modrinth:sodium:${project.sodium_version}"
-	modRuntimeOnly "maven.modrinth:sodium:${project.sodium_version}"
+	implementation "com.github.LlamaLad7:MixinExtras:${mixin_extras_version}"
+	annotationProcessor "com.github.LlamaLad7:MixinExtras:${mixin_extras_version}"
+	include "com.github.LlamaLad7:MixinExtras:${mixin_extras_version}"
+
+	modCompileOnly "maven.modrinth:sodium:${sodium_version}"
+	modRuntimeOnly "maven.modrinth:sodium:${sodium_version}"
 	implementation "org.joml:joml:1.10.4"
 }
 

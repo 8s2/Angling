@@ -2,6 +2,8 @@
   "values": [
     "minecraft:frog",
     "angling:dongfish",
+	"angling:anomalocaris",
+	"angling:anglerfish",
 	"#angling:hunted_by_pelican_when_baby"
   ]
 }

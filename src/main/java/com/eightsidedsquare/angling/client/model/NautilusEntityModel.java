@@ -3,26 +3,16 @@ package com.eightsidedsquare.angling.client.model;
 import com.eightsidedsquare.angling.common.entity.NautilusEntity;
 import com.eightsidedsquare.angling.core.AnglingUtil;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
-public class NautilusEntityModel extends AnimatedGeoModel<NautilusEntity> {
-    @Override
-    public Identifier getModelResource(NautilusEntity entity) {
-        return new Identifier(MOD_ID, "geo/nautilus.geo.json");
-    }
-
-    @Override
-    public Identifier getTextureResource(NautilusEntity entity) {
-        return new Identifier(MOD_ID, "textures/entity/nautilus/nautilus.png");
-    }
-
-    @Override
-    public Identifier getAnimationResource(NautilusEntity entity) {
-        return new Identifier(MOD_ID, "animations/nautilus.animation.json");
+public class NautilusEntityModel extends BasicEntityModel<NautilusEntity> {
+    public NautilusEntityModel() {
+        super("nautilus", true);
     }
 
     @Override

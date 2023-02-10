@@ -15,11 +15,21 @@ import net.minecraft.world.gen.placementmodifier.*;
 import java.util.List;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
-import static net.minecraft.world.gen.feature.VegetationPlacedFeatures.modifiers;
 
 public class AnglingPlacedFeatures {
     public static final RegistryEntry<PlacedFeature> PATCH_DUCKWEED = register("patch_duckweed",
-            AnglingConfiguredFeatures.PATCH_DUCKWEED, modifiers(2));
+            AnglingConfiguredFeatures.PATCH_DUCKWEED,
+            List.of(RarityFilterPlacementModifier.of(3),
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
+                    BiomePlacementModifier.of()));
+
+    public static final RegistryEntry<PlacedFeature> PATCH_SARGASSUM = register("patch_sargassum",
+            AnglingConfiguredFeatures.PATCH_SARGASSUM,
+            List.of(RarityFilterPlacementModifier.of(70),
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP,
+                    BiomePlacementModifier.of()));
 
     public static final RegistryEntry<PlacedFeature> OYSTER_REEF = register("oyster_reef",
                     AnglingConfiguredFeatures.OYSTER_REEF,
@@ -42,6 +52,13 @@ public class AnglingPlacedFeatures {
                     PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
                     BiomePlacementModifier.of()));
 
+    public static final RegistryEntry<PlacedFeature> PATCH_PAPYRUS = register("patch_papyrus",
+            AnglingConfiguredFeatures.PATCH_PAPYRUS,
+            List.of(CountPlacementModifier.of(2),
+                    SquarePlacementModifier.of(),
+                    PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
+                    BiomePlacementModifier.of()));
+
     public static RegistryEntry<PlacedFeature> register(String id, RegistryEntry<? extends ConfiguredFeature<?, ?>> registryEntry, List<PlacementModifier> modifiers) {
         return PlacedFeatures.register(MOD_ID + ":" + id, registryEntry, modifiers);
     }
@@ -55,6 +72,8 @@ public class AnglingPlacedFeatures {
         addFeature(OYSTER_REEF, GenerationStep.Feature.VEGETAL_DECORATION, AnglingBiomeTags.OYSTER_REEF_BIOMES);
         addFeature(CLAMS, GenerationStep.Feature.VEGETAL_DECORATION, AnglingBiomeTags.CLAMS_BIOMES);
         addFeature(PATCH_DUCKWEED, GenerationStep.Feature.VEGETAL_DECORATION, AnglingBiomeTags.DUCKWEED_BIOMES);
+        addFeature(PATCH_SARGASSUM, GenerationStep.Feature.VEGETAL_DECORATION, AnglingBiomeTags.SARGASSUM_BIOMES);
+        addFeature(PATCH_PAPYRUS, GenerationStep.Feature.VEGETAL_DECORATION, AnglingBiomeTags.PAPYRUS_BIOMES);
         addFeature(WORMY_BLOCK, GenerationStep.Feature.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD);
     }
 }

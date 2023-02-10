@@ -216,6 +216,7 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
                 : AnglingEntityTypeTags.COMMON_ENTITIES_IN_PELICAN_BEAK;
         EntityType<?> type = AnglingUtil.getRandomTagValue(world, tag, random);
         nbt.putString("id", Registry.ENTITY_TYPE.getId(type).toString());
+        nbt.putBoolean("FromBucket", true);
         if(type.isIn(AnglingEntityTypeTags.HUNTED_BY_PELICAN_WHEN_BABY)) {
             nbt.putInt("Age", -24000);
         }
@@ -278,11 +279,7 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
     @Override
     public void tickMovement() {
         super.tickMovement();
-        if(onGround) {
-            setTimeOffGround(0);
-        }else {
-            setTimeOffGround(getTimeOffGround() + 1);
-        }
+        setTimeOffGround(onGround ? 0 : getTimeOffGround() + 1);
     }
 
     @Override

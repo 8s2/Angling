@@ -37,8 +37,10 @@ public abstract class FishEntityMixin extends WaterCreatureEntity {
 
     @Inject(method = "initGoals", at = @At("TAIL"))
     protected void initGoals(CallbackInfo ci) {
-        goalSelector.add(1, new FishLayRoeGoal(this));
-        goalSelector.add(3, new FishMateGoal(this));
+        if(getType().isIn(AnglingEntityTypeTags.SPAWNING_FISH)) {
+            goalSelector.add(1, new FishLayRoeGoal(this));
+            goalSelector.add(3, new FishMateGoal(this));
+        }
     }
 
     @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)

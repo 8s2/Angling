@@ -90,7 +90,7 @@ public class RoeBlock extends BlockWithEntity implements Waterloggable {
     }
 
     public int getHatchTime(Random random) {
-        return random.nextBetween(3600, 7200) * 0 + 10;
+        return random.nextBetween(3600, 7200);
     }
 
     @Override

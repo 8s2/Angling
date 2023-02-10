@@ -5,6 +5,11 @@
     "minecraft:pufferfish",
     "minecraft:tropical_fish",
 	"angling:sunfish",
-	"angling:dongfish"
+	"angling:dongfish",
+	"angling:catfish",
+	"angling:bubble_eye",
+	"angling:anomalocaris",
+	"angling:anglerfish",
+	"angling:mahi_mahi"
   ]
 }

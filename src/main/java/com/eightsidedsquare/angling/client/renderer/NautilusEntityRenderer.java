@@ -7,11 +7,9 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.geo.render.built.GeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-public class NautilusEntityRenderer extends GeoEntityRenderer<NautilusEntity> {
+public class NautilusEntityRenderer extends BasicEntityRenderer<NautilusEntity> {
     public NautilusEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new NautilusEntityModel());
     }
@@ -22,10 +20,5 @@ public class NautilusEntityRenderer extends GeoEntityRenderer<NautilusEntity> {
         matrices.scale(0.65f, 0.65f, 0.65f);
         super.render(model, animatable, partialTicks, type, matrices, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, alpha);
         matrices.pop();
-    }
-
-    @Override
-    public RenderLayer getRenderType(NautilusEntity animatable, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
-        return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
     }
 }

@@ -40,6 +40,26 @@ public class AnglingSounds {
     public static final SoundEvent ENTITY_DONGFISH_DEATH = create("entity.dongfish.death");
     public static final SoundEvent ENTITY_DONGFISH_FLOP = create("entity.dongfish.flop");
     public static final SoundEvent ENTITY_DONGFISH_SHEAR = create("entity.dongfish.shear");
+    public static final SoundEvent ENTITY_CATFISH_HURT = create("entity.catfish.hurt");
+    public static final SoundEvent ENTITY_CATFISH_DEATH = create("entity.catfish.death");
+    public static final SoundEvent ENTITY_CATFISH_FLOP = create("entity.catfish.flop");
+    public static final SoundEvent ENTITY_SEAHORSE_HURT = create("entity.seahorse.hurt");
+    public static final SoundEvent ENTITY_SEAHORSE_DEATH = create("entity.seahorse.death");
+    public static final SoundEvent ENTITY_SEAHORSE_FLOP = create("entity.seahorse.flop");
+    public static final SoundEvent ENTITY_BUBBLE_EYE_HURT = create("entity.bubble_eye.hurt");
+    public static final SoundEvent ENTITY_BUBBLE_EYE_DEATH = create("entity.bubble_eye.death");
+    public static final SoundEvent ENTITY_BUBBLE_EYE_FLOP = create("entity.bubble_eye.flop");
+    public static final SoundEvent ENTITY_ANOMALOCARIS_HURT = create("entity.anomalocaris.hurt");
+    public static final SoundEvent ENTITY_ANOMALOCARIS_DEATH = create("entity.anomalocaris.death");
+    public static final SoundEvent ENTITY_ANOMALOCARIS_FLOP = create("entity.anomalocaris.flop");
+    public static final SoundEvent ENTITY_ANGLERFISH_HURT = create("entity.anglerfish.hurt");
+    public static final SoundEvent ENTITY_ANGLERFISH_DEATH = create("entity.anglerfish.death");
+    public static final SoundEvent ENTITY_ANGLERFISH_FLOP = create("entity.anglerfish.flop");
+    public static final SoundEvent ENTITY_URCHIN_HURT = create("entity.urchin.hurt");
+    public static final SoundEvent ENTITY_URCHIN_DEATH = create("entity.urchin.death");
+    public static final SoundEvent ENTITY_MAHI_MAHI_HURT = create("entity.mahi_mahi.hurt");
+    public static final SoundEvent ENTITY_MAHI_MAHI_DEATH = create("entity.mahi_mahi.death");
+    public static final SoundEvent ENTITY_MAHI_MAHI_FLOP = create("entity.mahi_mahi.flop");
 
     public static final BlockSoundGroup SHELL_SOUND_GROUP = new BlockSoundGroup(1, 1.25f, BLOCK_SHELL_BREAK, BLOCK_SHELL_STEP, BLOCK_SHELL_PLACE, BLOCK_SHELL_HIT, BLOCK_SHELL_FALL);
 

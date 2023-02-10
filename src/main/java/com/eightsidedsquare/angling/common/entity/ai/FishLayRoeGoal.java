@@ -14,7 +14,6 @@ import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -62,8 +61,8 @@ public class FishLayRoeGoal extends MoveToTargetPosGoal {
                 roeBlockEntity.setColors(colors.getLeft(), colors.getRight());
             }
             stop();
-        }else if(targetPos.isWithinDistance(entity.getPos(), 2) && entity.getY() > targetPos.getY() + 0.5d) {
-            entity.addVelocity(0, -0.025d, 0);
+        }else if(targetPos.isWithinDistance(entity.getPos(), 2)) {
+            entity.getMoveControl().moveTo(targetPos.getX() + 0.5d, targetPos.getY(), targetPos.getZ() + 0.5d, speed);
         }
     }
 
@@ -95,7 +94,6 @@ public class FishLayRoeGoal extends MoveToTargetPosGoal {
         return world.getBlockState(pos).isSideSolidFullSquare(world, pos, Direction.UP)
                 && world.getFluidState(abovePos).isOf(Fluids.WATER)
                 && world.getBlockState(abovePos).isOf(Blocks.WATER)
-                && noAlgaeNearby(world, abovePos)
-                && Direction.Type.HORIZONTAL.stream().allMatch(d -> world.getFluidState(abovePos.offset(d)).isIn(FluidTags.WATER));
+                && noAlgaeNearby(world, abovePos);
     }
 }

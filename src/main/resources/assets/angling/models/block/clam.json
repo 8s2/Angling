@@ -7,6 +7,7 @@
 		{
 			"from": [4, 0.1, 5.5],
 			"to": [12, 0.1, 10.5],
+			"shade": false,
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 0.1, 10.5]},
 			"faces": {
 				"up": {"uv": [0, 0, 8, 5], "texture": "#0"},
@@ -16,6 +17,7 @@
 		{
 			"from": [4, 0.1, 5.5],
 			"to": [12, 0.1, 10.5],
+			"shade": false,
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.1, 10.5]},
 			"faces": {
 				"up": {"uv": [8, 0, 16, 5], "texture": "#0"},

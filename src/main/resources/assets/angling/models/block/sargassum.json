@@ -1,0 +1,40 @@
+{
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "angling:block/sargassum",
+		"1": "angling:block/sargassum_side",
+		"particle": "angling:block/sargassum"
+	},
+	"elements": [
+		{
+			"from": [0, 0.5, 0],
+			"to": [16, 0.5, 16],
+			"shade": false,
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3.31371, -3.5, 8],
+			"to": [19.31371, 4.5, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 4, 16, 12], "texture": "#1"},
+				"south": {"uv": [0, 4, 16, 12], "texture": "#1"}
+			}
+		},
+		{
+			"from": [-3.31371, -3.5, 8],
+			"to": [19.31371, 4.5, 8],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 4, 16, 12], "texture": "#1"},
+				"south": {"uv": [0, 4, 16, 12], "texture": "#1"}
+			}
+		}
+	]
+}

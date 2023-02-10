@@ -13,6 +13,7 @@ import java.util.Map;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
+@SuppressWarnings("unused")
 public record SeaSlugColor(int color) {
 
     private static final Map<SeaSlugColor, Identifier> COLORS = new LinkedHashMap<>();

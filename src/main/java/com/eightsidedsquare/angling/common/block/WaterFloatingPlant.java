@@ -13,10 +13,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class DuckweedBlock extends PlantBlock implements Fertilizable {
+public class WaterFloatingPlant extends PlantBlock implements Fertilizable {
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 1, 16);
 
-    public DuckweedBlock(Settings settings) {
+    public WaterFloatingPlant(Settings settings) {
         super(settings);
     }
 

@@ -1,0 +1,17 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.urchin.idle": {
+			"loop": true,
+			"animation_length": 8,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time*45)*5", 0, "math.cos(query.anim_time*45)*5"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

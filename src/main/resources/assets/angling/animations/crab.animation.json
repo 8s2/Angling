@@ -1,0 +1,150 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.crab.moving": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"root": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, -5],
+							"easing": "easeInElastic"
+						},
+						"0.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeInElastic",
+							"easingArgs": [1]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0.5, 0, 0],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"front_left_legs": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 20]
+						},
+						"0.25": {
+							"vector": [0, 0, -20],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 0, 20],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"back_left_legs": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, -20]
+						},
+						"0.25": {
+							"vector": [0, 0, 20],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 0, -20],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"claw_left": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 22.5, 0]
+						},
+						"0.25": {
+							"vector": [10, 35, 5],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 22.5, 0],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"claw_right": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 25, 0]
+						},
+						"0.25": {
+							"vector": [-2.5, 35, 0],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 25, 0],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"back_right_legs": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, -20]
+						},
+						"0.25": {
+							"vector": [0, 0, 20],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 0, -20],
+							"easing": "easeInOutSine"
+						}
+					}
+				},
+				"front_right_legs": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 20]
+						},
+						"0.25": {
+							"vector": [0, 0, -20],
+							"easing": "easeInOutSine"
+						},
+						"0.5": {
+							"vector": [0, 0, 20],
+							"easing": "easeInOutSine"
+						}
+					}
+				}
+			}
+		},
+		"animation.crab.rotated": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, -90, 0]
+					}
+				}
+			}
+		},
+		"animation.crab.forwards": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

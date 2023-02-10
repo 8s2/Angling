@@ -198,7 +198,9 @@ public class CrabEntity extends AnimalEntity implements IAnimatable, Bucketable 
     @Override @SuppressWarnings("deprecation")
     public void copyDataToStack(ItemStack stack) {
         Bucketable.copyDataToStack(this, stack);
-        writeCustomDataToNbt(stack.getOrCreateNbt());
+        NbtCompound nbt = stack.getOrCreateNbt();
+        nbt.putString("Variant", getVariant().getId().toString());
+        nbt.putBoolean("FromBucket", isFromBucket());
 
     }
 

@@ -23,6 +23,7 @@ public class AnglingMod implements ModInitializer {
 		CrabVariant.init();
 		AnglingCriteria.init();
 		AnglingPlacedFeatures.init();
+		AnglingParticles.init();
 		FishVariantInheritance.init();
 		PelicanBeakEntityInitializer.init();
 

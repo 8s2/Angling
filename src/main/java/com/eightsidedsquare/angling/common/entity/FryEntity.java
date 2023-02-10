@@ -90,7 +90,11 @@ public class FryEntity extends FishEntity implements IAnimatable {
     @Override
     public void copyDataToStack(ItemStack stack) {
         super.copyDataToStack(stack);
-        writeCustomDataToNbt(stack.getOrCreateNbt());
+        NbtCompound nbt = stack.getOrCreateNbt();
+        nbt.putInt("Color", getColor());
+        nbt.putInt("Age", getAge());
+        nbt.put("Variant", getVariant());
+        nbt.putString("GrowUpTo", getGrowUpTo());
     }
 
     @Override

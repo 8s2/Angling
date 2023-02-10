@@ -310,8 +310,12 @@ public class SeaSlugEntity extends WaterCreatureEntity implements IAnimatable, B
     @Override @SuppressWarnings("deprecation")
     public void copyDataToStack(ItemStack stack) {
         Bucketable.copyDataToStack(this, stack);
-        writeCustomDataToNbt(stack.getOrCreateNbt());
-
+        NbtCompound nbt = stack.getOrCreateNbt();
+        writeMateData(nbt);
+        nbt.putBoolean("HasEggs", hasEggs());
+        nbt.put("MateData", getMateData());
+        nbt.putInt("LoveTicks", getLoveTicks());
+        nbt.putInt("LoveCooldown", getLoveCooldown());
     }
 
     @Override @SuppressWarnings("deprecation")

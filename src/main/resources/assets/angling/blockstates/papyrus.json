@@ -1,0 +1,55 @@
+{
+  "variants": {
+    "age=0": [
+	  {
+        "model": "angling:block/papyrus_age0"
+      },
+	  {
+        "model": "angling:block/papyrus_age0",
+        "y": 90
+      },
+	  {
+        "model": "angling:block/papyrus_age0",
+        "y": 180
+      },
+	  {
+        "model": "angling:block/papyrus_age0",
+        "y": 270
+      }
+	],
+    "age=1": [
+	  {
+        "model": "angling:block/papyrus_age1"
+      },
+	  {
+        "model": "angling:block/papyrus_age1",
+        "y": 90
+      },
+	  {
+        "model": "angling:block/papyrus_age1",
+        "y": 180
+      },
+	  {
+        "model": "angling:block/papyrus_age1",
+        "y": 270
+      }
+	],
+    "age=2": [
+	  {
+        "model": "angling:block/papyrus_age2"
+      },
+	  {
+        "model": "angling:block/papyrus_age2",
+        "y": 90
+      },
+	  {
+        "model": "angling:block/papyrus_age2",
+        "y": 180
+      },
+	  {
+        "model": "angling:block/papyrus_age2",
+        "y": 270
+      }
+	]
+  }
+}

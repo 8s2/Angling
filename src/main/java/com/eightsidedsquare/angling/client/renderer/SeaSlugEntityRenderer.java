@@ -1,6 +1,6 @@
 package com.eightsidedsquare.angling.client.renderer;
 
-import com.eightsidedsquare.angling.client.model.SeaSlugEntityModel;
+import com.eightsidedsquare.angling.client.model.BasicEntityModel;
 import com.eightsidedsquare.angling.common.entity.SeaSlugEntity;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
@@ -15,7 +15,7 @@ import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
 
 public class SeaSlugEntityRenderer extends GeoEntityRenderer<SeaSlugEntity> {
     public SeaSlugEntityRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new SeaSlugEntityModel());
+        super(ctx, new BasicEntityModel<>("sea_slug", false));
         this.addLayer(new SeaSlugLayerRenderer(this));
         this.shadowRadius = 0.1f;
     }

@@ -7,8 +7,11 @@
     "minecraft:tadpole",
 	"angling:fry",
 	"angling:sunfish",
-	"angling:nautilus",
     "angling:sea_slug",
-    "angling:crab"
+    "angling:crab",
+    "angling:catfish",
+    "angling:bubble_eye",
+    "angling:seahorse",
+	"angling:nautilus"
   ]
 }

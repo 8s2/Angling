@@ -1,0 +1,48 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.anemone.idle": {
+			"loop": true,
+			"animation_length": 16,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 22.5) * 5", 0, "math.cos(query.anim_time * 22.5) * 5"]
+					},
+					"scale": {
+						"vector": [1, 0.5, 1]
+					}
+				},
+				"body": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 22.5) * -10", 0, "math.cos(query.anim_time * 22.5) * -10"]
+					},
+					"scale": {
+						"vector": [1, 2, 1]
+					}
+				},
+				"north_tentacles": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * 15 - 5", 0, 0]
+					}
+				},
+				"south_tentacles": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 90) * -15", 0, 0]
+					}
+				},
+				"east_tentacles": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 90) * -15 + 5"]
+					}
+				},
+				"west_tentacles": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 90) * 15 - 5"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
