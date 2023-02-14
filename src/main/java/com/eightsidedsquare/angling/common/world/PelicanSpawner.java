@@ -2,11 +2,11 @@ package com.eightsidedsquare.angling.common.world;
 
 import com.eightsidedsquare.angling.common.entity.PelicanEntity;
 import com.eightsidedsquare.angling.core.AnglingEntities;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.EntityBucketItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
@@ -25,7 +25,7 @@ public class PelicanSpawner implements Spawner {
         if(spawnAnimals && world.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && --cooldown <= 0) {
             cooldown = 2400;
             Random random = world.random;
-            if(world.isDay() && world.getDimension().hasSkyLight() && random.nextInt(10) == 0) {
+            if(world.isDay() && world.getDimension().hasSkyLight() && random.nextInt(16) == 0) {
                 int total = 0;
                 List<ServerPlayerEntity> players = world.getPlayers(p -> !p.isSpectator());
                 PelicanEntity entity;
@@ -33,6 +33,7 @@ public class PelicanSpawner implements Spawner {
                     BlockPos spawnPos = player.getBlockPos().add(random.nextBetween(-RADIUS, RADIUS), random.nextBetween(20, 35), random.nextBetween(-RADIUS, RADIUS));
                     if(world.isSkyVisible(spawnPos) &&
                             SpawnHelper.isClearForSpawn(world, spawnPos, world.getBlockState(spawnPos), world.getFluidState(spawnPos), AnglingEntities.PELICAN) &&
+                            playerHasEntityBucketItem(player) &&
                             (entity = AnglingEntities.PELICAN.create(world)) != null) {
                         entity.refreshPositionAndAngles(spawnPos, 0, 0);
                         entity.initialize(world, world.getLocalDifficulty(spawnPos), SpawnReason.NATURAL, null, null);
@@ -44,5 +45,13 @@ public class PelicanSpawner implements Spawner {
             }
         }
         return 0;
+    }
+
+    private boolean playerHasEntityBucketItem(PlayerEntity player) {
+        for(int i = 0; i < player.getInventory().size(); i++) {
+            if(player.getInventory().getStack(i).getItem() instanceof EntityBucketItem)
+                return true;
+        }
+        return false;
     }
 }

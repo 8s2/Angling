@@ -79,14 +79,15 @@ public class UrchinBlock extends PlantBlock implements BlockEntityProvider, Wate
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
+    @Nullable
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return getDefaultState().with(WATERLOGGED, !ctx.getWorld().getDimension().ultrawarm());
+    }
+
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
         return !floor.getCollisionShape(world, pos).getFace(Direction.UP).isEmpty() || floor.isSideSolidFullSquare(world, pos, Direction.UP);
-    }
-
-    @Nullable
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(WATERLOGGED, true);
     }
 
     @Override

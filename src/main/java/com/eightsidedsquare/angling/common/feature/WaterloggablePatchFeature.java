@@ -3,6 +3,7 @@ package com.eightsidedsquare.angling.common.feature;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
@@ -34,6 +35,7 @@ public class WaterloggablePatchFeature extends Feature<SimpleBlockFeatureConfig>
             BlockPos blockPos2 = new BlockPos(blockPos.getX() + dx, y, blockPos.getZ() + dz);
             BlockState state = ctx.getConfig().toPlace().getBlockState(random, blockPos2);
             if (state.canPlaceAt(structureWorldAccess, blockPos2) &&
+                    !structureWorldAccess.getBlockState(blockPos2.up()).isOf(Blocks.TALL_SEAGRASS) &&
                     !structureWorldAccess.getBlockState(blockPos2.down()).isIn(BlockTags.ICE)) {
                 if(state.contains(Properties.WATERLOGGED))
                     state = state.with(Properties.WATERLOGGED, structureWorldAccess.getFluidState(blockPos2).isOf(Fluids.WATER));

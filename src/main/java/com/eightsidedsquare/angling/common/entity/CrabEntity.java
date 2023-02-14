@@ -6,10 +6,7 @@ import com.eightsidedsquare.angling.core.AnglingEntities;
 import com.eightsidedsquare.angling.core.AnglingItems;
 import com.eightsidedsquare.angling.core.AnglingSounds;
 import com.eightsidedsquare.angling.core.tags.AnglingBlockTags;
-import net.minecraft.entity.Bucketable;
-import net.minecraft.entity.EntityData;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -32,6 +29,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.LocalDifficulty;
@@ -75,15 +73,14 @@ public class CrabEntity extends AnimalEntity implements IAnimatable, Bucketable 
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25d));
-        this.goalSelector.add(2, new GoToWaterGoal(this, 1, 12));
-        this.goalSelector.add(3, new AnimalMateGoal(this, 1));
-        this.goalSelector.add(4, new TemptGoal(this, 1.2D, Ingredient.ofItems(AnglingItems.WORM), false));
-        this.goalSelector.add(5, new FollowParentGoal(this, 1.1d));
-        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1));
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.goalSelector.add(0, new EscapeDangerGoal(this, 1.25d));
+        this.goalSelector.add(1, new GoToWaterGoal(this, 1, 12));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1));
+        this.goalSelector.add(3, new TemptGoal(this, 1.2D, Ingredient.ofItems(AnglingItems.WORM), false));
+        this.goalSelector.add(4, new FollowParentGoal(this, 1.1d));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6));
+        this.goalSelector.add(7, new LookAroundGoal(this));
     }
 
     @Override
@@ -108,6 +105,20 @@ public class CrabEntity extends AnimalEntity implements IAnimatable, Bucketable 
             return child;
         }
         return null;
+    }
+
+    public void travel(Vec3d movementInput) {
+        if (this.canMoveVoluntarily() && this.isTouchingWater()) {
+            this.updateVelocity(0.01f, movementInput.multiply(50));
+            this.move(MovementType.SELF, this.getVelocity());
+            this.setVelocity(this.getVelocity().multiply(0.9d));
+            if (this.getTarget() == null) {
+                this.setVelocity(this.getVelocity().add(0, -0.005d, 0));
+            }
+        } else {
+            super.travel(movementInput);
+        }
+
     }
 
     @Override

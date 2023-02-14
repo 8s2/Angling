@@ -105,6 +105,7 @@ public class SeaSlugEggsBlockEntity extends BlockEntity implements RenderAttachm
                     entity.setBodyYaw(random.nextBetween(-180, 180));
                     entity.setHeadYaw(entity.bodyYaw);
                     entity.setPos(pos.getX() + 0.5d, pos.getY() + 0.1d, pos.getZ() + 0.5d);
+                    entity.setFromBucket(true);
                     world.spawnEntity(entity);
                 }
             }

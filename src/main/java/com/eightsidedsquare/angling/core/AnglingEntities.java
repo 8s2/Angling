@@ -233,7 +233,7 @@ public class AnglingEntities {
         );
         BiomeModifications.addSpawn(
                 biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.NAUTILUS_SPAWN_IN),
-                SpawnGroup.WATER_AMBIENT, NAUTILUS, 12, 1, 3
+                SpawnGroup.WATER_AMBIENT, NAUTILUS, 4, 1, 3
         );
         BiomeModifications.addSpawn(
                 biome -> biome.getBiomeRegistryEntry().isIn(AnglingBiomeTags.CATFISH_SPAWN_IN),

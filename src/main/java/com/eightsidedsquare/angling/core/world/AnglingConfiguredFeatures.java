@@ -1,10 +1,8 @@
 package com.eightsidedsquare.angling.core.world;
 
-import com.eightsidedsquare.angling.common.block.PapyrusBlock;
 import com.eightsidedsquare.angling.common.feature.NoisePatchFeatureConfig;
 import com.eightsidedsquare.angling.core.AnglingBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.Direction;

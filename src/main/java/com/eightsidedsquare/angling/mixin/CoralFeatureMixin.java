@@ -31,8 +31,10 @@ public abstract class CoralFeatureMixin {
                                 AnglingBlocks.STARFISH.getDefaultState().with(FacingBlock.FACING, d), Block.NOTIFY_LISTENERS);
                         StarfishBlock.randomize(world, pos.offset(d), random);
                     });
-            if(random.nextFloat() < 0.01f && canPlace(pos.up(), world)) {
-                world.setBlockState(pos.up(), AnglingBlocks.ANEMONE.getDefaultState().with(Properties.WATERLOGGED, true), Block.NOTIFY_LISTENERS);
+            if(random.nextFloat() < 0.025f && canPlace(pos.up(), world)) {
+                world.setBlockState(pos.up(),
+                        (random.nextBoolean() ? AnglingBlocks.URCHIN : AnglingBlocks.ANEMONE)
+                        .getDefaultState().with(Properties.WATERLOGGED, true), Block.NOTIFY_LISTENERS);
             }
         }
     }

@@ -60,7 +60,8 @@ public abstract class FishVariantInheritance {
                     childVariant = SunfishVariant.BLUEGILL_AND_REDBREAST_HYBRID;
                 }else if(AnglingUtil.pairsAreEqual(parentVariant, mateVariant, SunfishVariant.BLUEGILL, SunfishVariant.PUMPKINSEED)) {
                     childVariant = SunfishVariant.BLUEGILL_AND_PUMPKINSEED_HYBRID;
-                }
+                }else if(childVariant.equals(SunfishVariant.DIANSUS_DIANSUR))
+                    childVariant = SunfishVariant.GREEN;
                 child.putString("Variant", SunfishVariant.getId(childVariant).toString());
                 return child;
             }

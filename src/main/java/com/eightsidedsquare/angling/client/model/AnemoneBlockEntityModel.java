@@ -1,7 +1,6 @@
 package com.eightsidedsquare.angling.client.model;
 
 import com.eightsidedsquare.angling.common.entity.AnemoneBlockEntity;
-import com.eightsidedsquare.angling.core.AnglingUtil;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

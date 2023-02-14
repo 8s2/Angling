@@ -1,11 +1,9 @@
 package com.eightsidedsquare.angling.common.entity;
 
-import com.eightsidedsquare.angling.common.block.StarfishBlock;
 import com.eightsidedsquare.angling.core.AnglingEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;

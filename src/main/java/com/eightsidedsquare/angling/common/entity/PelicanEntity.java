@@ -332,9 +332,9 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.swimming", true));
         }else if(entity.isFlying()) {
             if (Math.abs(entity.getVelocity().y) > 0.05d) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.flapping", true));
-            } else {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.flying", true));
+            } else {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.flapping", true));
             }
         }else if(event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.walking", true));

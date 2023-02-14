@@ -31,11 +31,6 @@ public abstract class PelicanBeakEntityInitializer {
     };
 
     public static void init() {
-        registerInitializer(EntityType.COD, SIMPLE_INITIALIZER);
-        registerInitializer(EntityType.SALMON, SIMPLE_INITIALIZER);
-        registerInitializer(EntityType.BEE, SIMPLE_INITIALIZER);
-        registerInitializer(EntityType.TURTLE, SIMPLE_INITIALIZER);
-        registerInitializer(EntityType.TADPOLE, SIMPLE_INITIALIZER);
         registerInitializer(AnglingEntities.DONGFISH, new PelicanBeakEntityInitializer() {
             @Override
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {
@@ -43,9 +38,6 @@ public abstract class PelicanBeakEntityInitializer {
                 return nbt;
             }
         });
-        registerInitializer(AnglingEntities.CATFISH, SIMPLE_INITIALIZER);
-        registerInitializer(AnglingEntities.SEAHORSE, SIMPLE_INITIALIZER);
-        registerInitializer(AnglingEntities.BUBBLE_EYE, SIMPLE_INITIALIZER);
         registerInitializer(EntityType.PUFFERFISH, new PelicanBeakEntityInitializer() {
             @Override
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {

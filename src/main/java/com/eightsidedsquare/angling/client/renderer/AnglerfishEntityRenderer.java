@@ -32,21 +32,6 @@ public class AnglerfishEntityRenderer extends GeoEntityRenderer<AnglerfishEntity
             super(entityRendererIn);
         }
 
-        public void render(int color, Identifier texture, boolean glow, MatrixStack matrixStackIn, VertexConsumerProvider bufferIn, int packedLightIn, AnglerfishEntity entity, float partialTicks) {
-
-            if(texture != null) {
-                Identifier model = this.getEntityModel().getModelResource(entity);
-                float r = ((color >> 16) & 0xff) / 255f;
-                float g = ((color >> 8) & 0xff) / 255f;
-                float b = (color & 0xff) / 255f;
-                int overlay = OverlayTexture.getUv(0,
-                        entity.hurtTime > 0 || entity.deathTime > 0);
-
-                this.getRenderer().render(this.getEntityModel().getModel(model), entity, partialTicks, this.getRenderType(texture), matrixStackIn, bufferIn,
-                        bufferIn.getBuffer(this.getRenderType(texture)), glow ? LightmapTextureManager.MAX_LIGHT_COORDINATE : packedLightIn, overlay, r, g, b, 1f);
-            }
-        }
-
         @Override
         public void render(MatrixStack matrixStackIn, VertexConsumerProvider bufferIn, int packedLightIn, AnglerfishEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 
