@@ -40,7 +40,6 @@ public class SeaSlugLayEggsGoal extends MoveToTargetPosGoal {
                 eggsBlockEntity.setParentsData(entity.writeMateData(new NbtCompound()), entity.getMateData().copy());
                 eggsBlockEntity.setColor(entity.getBaseColor());
             }
-            entity.setMateData(new NbtCompound());
         }
     }
 

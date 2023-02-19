@@ -17,6 +17,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -77,6 +78,16 @@ public class UrchinBlock extends PlantBlock implements BlockEntityProvider, Wate
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+
+        if (!state.isOf(newState.getBlock()) && world.getBlockEntity(pos) instanceof UrchinBlockEntity entity) {
+            ItemScatterer.spawn(world, pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, entity.getHat().copy());
+        }
+
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     @Nullable

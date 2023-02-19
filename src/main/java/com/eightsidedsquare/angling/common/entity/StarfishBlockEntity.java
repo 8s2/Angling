@@ -103,6 +103,7 @@ public class StarfishBlockEntity extends BlockEntity implements IAnimatable {
         return color;
     }
 
+    @SuppressWarnings("unused")
     public static int getColor(BlockState state, BlockRenderView world, BlockPos pos, int i) {
         if(world != null && world.getBlockEntity(pos) instanceof StarfishBlockEntity entity) {
             return entity.isRainbow() ? getRainbowColor() : entity.getColor();
@@ -111,13 +112,14 @@ public class StarfishBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     public static int getRainbowColor() {
-        if(MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.getWorld() != null) {
-            long time = MinecraftClient.getInstance().player.getWorld().getTime();
+        if(MinecraftClient.getInstance().player != null) {
+            long time = MinecraftClient.getInstance().player.age;
             return Color.HSBtoRGB((time / 256f), 0.75f, 1f);
         }
         return 0xffffff;
     }
 
+    @SuppressWarnings("unused")
     public static int getItemColor(ItemStack stack, int i) {
         NbtCompound nbt = BlockItem.getBlockEntityNbt(stack);
         if(nbt != null) {
