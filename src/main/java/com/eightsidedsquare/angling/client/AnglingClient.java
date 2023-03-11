@@ -38,6 +38,7 @@ import software.bernie.geckolib3.core.util.Color;
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
 public class AnglingClient implements ClientModInitializer {
+
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
@@ -84,7 +85,6 @@ public class AnglingClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(AnglingParticles.WORM, WormParticle.Factory::new);
 
         ModelPredicateProviderRegistry.register(AnglingItems.DONGFISH_BUCKET, new Identifier(MOD_ID, "has_horngus"), this::dongfishBucketItemHasHorngus);
-
     }
 
     private float dongfishBucketItemHasHorngus(ItemStack stack, ClientWorld clientWorld, LivingEntity livingEntity, int i) {

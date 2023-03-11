@@ -1,5 +1,6 @@
 package com.eightsidedsquare.angling.mixin;
 
+import com.eightsidedsquare.angling.core.AnglingMod;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.block.FluidRenderer;
@@ -18,7 +19,7 @@ public abstract class FluidRendererMixin {
 
     @Inject(method = "shouldRenderSide", at = @At("HEAD"), cancellable = true)
     private static void shouldRenderSide(BlockRenderView world, BlockPos pos, FluidState fluidState, BlockState blockState, Direction direction, FluidState neighborFluidState, CallbackInfoReturnable<Boolean> cir) {
-        if(fluidState.isIn(FluidTags.WATER)) {
+        if(AnglingMod.CONFIG.hideWaterBehindGlass && fluidState.isIn(FluidTags.WATER)) {
             if(world.getBlockState(pos.offset(direction)).isIn(ConventionalBlockTags.GLASS_BLOCKS)) {
                 cir.setReturnValue(false);
             }

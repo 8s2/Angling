@@ -141,5 +141,7 @@
   "advancements.husbandry.traded_with_pelican.title": "Paying the Bill",
   "advancements.husbandry.traded_with_pelican.description": "Trade the Fish inside a Pelican's Beak for another Fish",
   "advancements.husbandry.look_at_nautilus.title": "Cephalopod Activities",
-  "advancements.husbandry.look_at_nautilus.description": "Observe a Nautilus"
+  "advancements.husbandry.look_at_nautilus.description": "Observe a Nautilus",
+  "text.autoconfig.angling.title": "Angling Config",
+  "text.autoconfig.angling.option.hideWaterBehindGlass": "Hide Water Behind Glass"
 }
