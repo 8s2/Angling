@@ -1,6 +1,6 @@
 package com.eightsidedsquare.angling.mixin.integration;
 
-import com.eightsidedsquare.angling.client.AnglingClient;
+import com.eightsidedsquare.angling.core.AnglingMod;
 import me.jellysquid.mods.sodium.client.render.pipeline.FluidRenderer;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
@@ -23,7 +23,7 @@ public abstract class SodiumFluidRendererMixin {
 
     @Inject(method = "isFluidOccluded", at = @At("RETURN"), cancellable = true)
     private void isFluidOccluded(BlockRenderView world, int x, int y, int z, Direction dir, Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
-        if(AnglingClient.CONFIG.hideWaterBehindGlass && !cir.getReturnValue()) {
+        if(AnglingMod.CONFIG.hideWaterBehindGlass && !cir.getReturnValue()) {
             BlockState state = world.getBlockState(new BlockPos(scratchPos).offset(dir.getOpposite()));
             BlockState sideState = world.getBlockState(scratchPos);
             if(state.getFluidState().isIn(FluidTags.WATER) && sideState.isIn(ConventionalBlockTags.GLASS_BLOCKS)) {

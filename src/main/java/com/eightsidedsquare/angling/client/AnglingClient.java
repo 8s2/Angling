@@ -1,6 +1,5 @@
 package com.eightsidedsquare.angling.client;
 
-import com.eightsidedsquare.angling.config.AnglingConfig;
 import com.eightsidedsquare.angling.client.model.CrabEntityModel;
 import com.eightsidedsquare.angling.client.model.DongfishEntityModel;
 import com.eightsidedsquare.angling.client.model.SunfishEntityModel;
@@ -16,8 +15,6 @@ import com.eightsidedsquare.angling.core.AnglingBlocks;
 import com.eightsidedsquare.angling.core.AnglingEntities;
 import com.eightsidedsquare.angling.core.AnglingItems;
 import com.eightsidedsquare.angling.core.AnglingParticles;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -41,7 +38,6 @@ import software.bernie.geckolib3.core.util.Color;
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
 public class AnglingClient implements ClientModInitializer {
-    public static AnglingConfig CONFIG;
 
     @Override
     public void onInitializeClient() {
@@ -89,9 +85,6 @@ public class AnglingClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(AnglingParticles.WORM, WormParticle.Factory::new);
 
         ModelPredicateProviderRegistry.register(AnglingItems.DONGFISH_BUCKET, new Identifier(MOD_ID, "has_horngus"), this::dongfishBucketItemHasHorngus);
-
-        AutoConfig.register(AnglingConfig.class, JanksonConfigSerializer::new);
-        CONFIG = AutoConfig.getConfigHolder(AnglingConfig.class).getConfig();
     }
 
     private float dongfishBucketItemHasHorngus(ItemStack stack, ClientWorld clientWorld, LivingEntity livingEntity, int i) {
