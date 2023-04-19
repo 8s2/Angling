@@ -9,10 +9,10 @@ import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.TropicalFishEntity;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +50,7 @@ public abstract class PelicanBeakEntityInitializer {
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {
                 int variant = random.nextInt(5) == 0 ?
                         (random.nextInt(2) | random.nextInt(6) << 8 | random.nextInt(15) << 16 | random.nextInt(15) << 24)
-                        : Util.getRandom(TropicalFishEntity.COMMON_VARIANTS, random);
+                        : TropicalFishEntity.COMMON_VARIANTS.indexOf(Util.getRandom(TropicalFishEntity.COMMON_VARIANTS.toArray(), random));
                 nbt.putInt("Variant", variant);
                 return nbt;
             }
@@ -65,7 +65,7 @@ public abstract class PelicanBeakEntityInitializer {
         registerInitializer(EntityType.FROG, new PelicanBeakEntityInitializer() {
             @Override
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {
-                Identifier variant = Registry.FROG_VARIANT.getId(Util.getRandom(Registry.FROG_VARIANT.stream().toList(), random));
+                Identifier variant = Registries.FROG_VARIANT.getId(Util.getRandom(Registries.FROG_VARIANT.stream().toList(), random));
                 if(variant != null)
                     nbt.putString("variant", variant.toString());
                 return nbt;
@@ -93,7 +93,7 @@ public abstract class PelicanBeakEntityInitializer {
             @Override
             public NbtCompound initialize(NbtCompound nbt, Random random, World world) {
                 EntityType<?> growUpTo = AnglingUtil.getRandomTagValue(world, AnglingEntityTypeTags.SPAWNING_FISH, random);
-                nbt.putString("GrowUpTo", Registry.ENTITY_TYPE.getId(growUpTo).toString());
+                nbt.putString("GrowUpTo", Registries.ENTITY_TYPE.getId(growUpTo).toString());
                 NbtCompound variant = new NbtCompound();
                 if(!growUpTo.equals(AnglingEntities.FRY))
                     getInitializer(growUpTo).initialize(variant, random, world);

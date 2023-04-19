@@ -10,25 +10,28 @@ import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class NautilusEntity extends FishEntity implements IAnimatable {
+public class NautilusEntity extends FishEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.nautilus.idle");
+    private final RawAnimation movingAnimation = RawAnimation.begin().thenLoop("animation.nautilus.moving");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     public NautilusEntity(EntityType<? extends FishEntity> entityType, World world) {
         super(entityType, world);
@@ -57,8 +60,18 @@ public class NautilusEntity extends FishEntity implements IAnimatable {
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 2, this::controller));
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
+    }
+
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
     }
 
     @Override
@@ -71,18 +84,13 @@ public class NautilusEntity extends FishEntity implements IAnimatable {
         super.tickMovement();
     }
 
-    private PlayState controller(AnimationEvent<NautilusEntity> event) {
-        if(event.isMoving() && isTouchingWater()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.nautilus.moving", true));
+    private PlayState controller(AnimationState<NautilusEntity> state) {
+        if(state.isMoving() && isTouchingWater()) {
+            state.getController().setAnimation(movingAnimation);
         }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.nautilus.idle", true));
+            state.getController().setAnimation(idleAnimation);
         }
         return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
     }
 
     @SuppressWarnings("deprecation")

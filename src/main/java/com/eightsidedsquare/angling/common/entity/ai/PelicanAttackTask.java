@@ -6,10 +6,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.LookTargetUtil;
+import net.minecraft.entity.ai.brain.task.MultiTickTask;
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.server.world.ServerWorld;
 
-public class PelicanAttackTask extends Task<PelicanEntity> {
+public class PelicanAttackTask extends MultiTickTask<PelicanEntity> {
     private final long interval;
     private Phase phase;
     private int catchingTicks;

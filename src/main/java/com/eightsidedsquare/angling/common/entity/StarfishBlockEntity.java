@@ -14,19 +14,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.BlockRenderView;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.awt.*;
 
-public class StarfishBlockEntity extends BlockEntity implements IAnimatable {
+public class StarfishBlockEntity extends BlockEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation deadAnimation = RawAnimation.begin().thenLoop("animation.starfish.dead");
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.starfish.idle");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     private double randomRotation;
     private int color;
     private boolean rainbow;
@@ -43,15 +46,25 @@ public class StarfishBlockEntity extends BlockEntity implements IAnimatable {
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 0, this::controller));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::controller));
     }
 
-    private PlayState controller(AnimationEvent<StarfishBlockEntity> event) {
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
+    }
+
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    private PlayState controller(AnimationState<StarfishBlockEntity> state) {
         if(((StarfishBlock) getCachedState().getBlock()).isDead()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.starfish.dead", true));
+            state.getController().setAnimation(deadAnimation);
         }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.starfish.idle", true));
+            state.getController().setAnimation(idleAnimation);
         }
         return PlayState.CONTINUE;
     }
@@ -142,10 +155,5 @@ public class StarfishBlockEntity extends BlockEntity implements IAnimatable {
             case UP -> Vec3i.ZERO;
             case DOWN -> new Vec3i(180, 180, 0);
         };
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
     }
 }

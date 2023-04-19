@@ -25,17 +25,19 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class UrchinEntity extends WaterCreatureEntity implements IAnimatable, Bucketable {
+public class UrchinEntity extends WaterCreatureEntity implements GeoAnimatable, Bucketable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.urchin.idle");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<Boolean> FROM_BUCKET = DataTracker.registerData(UrchinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public UrchinEntity(EntityType<? extends WaterCreatureEntity> entityType, World world) {
@@ -92,20 +94,24 @@ public class UrchinEntity extends WaterCreatureEntity implements IAnimatable, Bu
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::controller));
-    }
-
-    private PlayState controller(AnimationEvent<UrchinEntity> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.urchin.idle", true));
-        return PlayState.CONTINUE;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public double getTick(Object o) {
+        return 0;
     }
 
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
+    }
+
+    private PlayState controller(AnimationState<UrchinEntity> state) {
+        state.getController().setAnimation(idleAnimation);
+        return PlayState.CONTINUE;
+    }
     @Override
     public boolean isFromBucket() {
         return dataTracker.get(FROM_BUCKET);

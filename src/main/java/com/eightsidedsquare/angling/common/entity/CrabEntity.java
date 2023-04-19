@@ -6,8 +6,18 @@ import com.eightsidedsquare.angling.core.AnglingEntities;
 import com.eightsidedsquare.angling.core.AnglingItems;
 import com.eightsidedsquare.angling.core.AnglingSounds;
 import com.eightsidedsquare.angling.core.tags.AnglingBlockTags;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.Bucketable;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -23,6 +33,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -31,24 +42,27 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class CrabEntity extends AnimalEntity implements IAnimatable, Bucketable {
+public class CrabEntity extends AnimalEntity implements GeoAnimatable, Bucketable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation rotatedCrabAnimation = RawAnimation.begin().thenLoop("animation.crab.rotated");
+    private final RawAnimation crabForwardsAnimation = RawAnimation.begin().thenLoop("animation.crab.forwards");
+    private final RawAnimation crabMovingAnimation = RawAnimation.begin().thenLoop("animation.crab.moving");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     private static final TrackedData<CrabVariant> VARIANT = DataTracker.registerData(CrabEntity.class, CrabVariant.TRACKED_DATA_HANDLER);
     private static final TrackedData<Boolean> FROM_BUCKET = DataTracker.registerData(CrabEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -151,26 +165,37 @@ public class CrabEntity extends AnimalEntity implements IAnimatable, Bucketable 
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "rotation_controller", 6, this::rotationController));
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 4, this::controller));
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "rotation_controller", 6, this::rotationController));
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 4, this::controller));
     }
 
-    private PlayState rotationController(AnimationEvent<CrabEntity> event) {
-        if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crab.rotated", true));
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
+    }
+
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    private PlayState rotationController(AnimationState<CrabEntity> state) {
+        if(state.isMoving()) {
+            state.getController().setAnimation(rotatedCrabAnimation);
             return PlayState.CONTINUE;
         }
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crab.forwards", true));
+        state.getController().setAnimation(crabForwardsAnimation);
+
         return PlayState.CONTINUE;
     }
 
-    private PlayState controller(AnimationEvent<CrabEntity> event) {
-        if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.crab.moving", true));
+    private PlayState controller(AnimationState<CrabEntity> state) {
+        if(state.isMoving()) {
+            state.getController().setAnimation(crabMovingAnimation);
             return PlayState.CONTINUE;
         }
-        event.getController().clearAnimationCache();
+        state.getController().forceAnimationReset();
         return PlayState.STOP;
     }
 
@@ -181,11 +206,6 @@ public class CrabEntity extends AnimalEntity implements IAnimatable, Bucketable 
 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         return Bucketable.tryBucket(player, hand, this).orElse(super.interactMob(player, hand));
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {

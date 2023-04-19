@@ -7,11 +7,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class AnglingUtil {
 
     public static NbtCompound entityToNbt(Entity entity, boolean stripData) {
         NbtCompound nbt = entity.writeNbt(new NbtCompound());
-        nbt.putString("id", Registry.ENTITY_TYPE.getId(entity.getType()).toString());
+        nbt.putString("id", Registries.ENTITY_TYPE.getId(entity.getType()).toString());
         if(stripData){
             stripEntityNbt(nbt);
         }

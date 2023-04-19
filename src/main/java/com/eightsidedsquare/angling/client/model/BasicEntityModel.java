@@ -3,17 +3,17 @@ package com.eightsidedsquare.angling.client.model;
 import com.eightsidedsquare.angling.core.AnglingUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
-public class BasicEntityModel<A extends LivingEntity & IAnimatable> extends AnimatedGeoModel<A> {
+public class BasicEntityModel<A extends LivingEntity & GeoAnimatable> extends GeoModel<A> {
 
     private final Identifier model;
     private final Identifier texture;
@@ -57,24 +57,24 @@ public class BasicEntityModel<A extends LivingEntity & IAnimatable> extends Anim
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void setLivingAnimations(A entity, Integer uniqueID, AnimationEvent event) {
+    public void setCustomAnimations(A animatable, long instanceId, AnimationState<A> animationState) {
         if(!AnglingUtil.isReloadingResources()) {
-            super.setLivingAnimations(entity, uniqueID, event);
+            super.setCustomAnimations(animatable, instanceId, animationState);
             if(liesOutOfWater) {
-                IBone root = getAnimationProcessor().getBone("root");
-                if (!entity.isTouchingWater() && root != null) {
-                    root.setRotationZ((float) (Math.PI / 2d));
+                CoreGeoBone root = getAnimationProcessor().getBone("root");
+                if (!animatable.isTouchingWater() && root != null) {
+                    root.setRotZ((float) (Math.PI / 2d));
                 }
             }
             if(head != null) {
-                IBone headBone = this.getAnimationProcessor().getBone(head);
-                EntityModelData extraData = (EntityModelData) event.getExtraDataOfType(EntityModelData.class).get(0);
+                CoreGeoBone headBone = this.getAnimationProcessor().getBone(head);
+                EntityModelData extraData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
                 if (headBone != null) {
-                    headBone.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
-                    headBone.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
+                    headBone.setRotX(extraData.headPitch() * ((float) Math.PI / 180F));
+                    headBone.setRotY(extraData.netHeadYaw() * ((float) Math.PI / 180F));
                 }
             }
         }
     }
+
 }

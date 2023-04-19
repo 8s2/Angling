@@ -13,8 +13,9 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.WaterCreatureEntity;
 import net.minecraft.entity.passive.FishEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
@@ -22,7 +23,7 @@ import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 public class AnglingEntities {
 
     public static final BlockEntityType<RoeBlockEntity> ROE = Registry.register(
-            Registry.BLOCK_ENTITY_TYPE,
+            Registries.BLOCK_ENTITY_TYPE,
             new Identifier(MOD_ID, "roe"),
             FabricBlockEntityTypeBuilder
                     .create(RoeBlockEntity::new)
@@ -31,7 +32,7 @@ public class AnglingEntities {
     );
 
     public static final BlockEntityType<StarfishBlockEntity> STARFISH = Registry.register(
-            Registry.BLOCK_ENTITY_TYPE,
+            Registries.BLOCK_ENTITY_TYPE,
             new Identifier(MOD_ID, "starfish"),
             FabricBlockEntityTypeBuilder
                     .create(StarfishBlockEntity::new)
@@ -40,7 +41,7 @@ public class AnglingEntities {
     );
 
     public static final BlockEntityType<SeaSlugEggsBlockEntity> SEA_SLUG_EGGS = Registry.register(
-            Registry.BLOCK_ENTITY_TYPE,
+            Registries.BLOCK_ENTITY_TYPE,
             new Identifier(MOD_ID, "sea_slug_eggs"),
             FabricBlockEntityTypeBuilder
                     .create(SeaSlugEggsBlockEntity::new)
@@ -49,7 +50,7 @@ public class AnglingEntities {
     );
 
     public static final BlockEntityType<AnemoneBlockEntity> ANEMONE = Registry.register(
-            Registry.BLOCK_ENTITY_TYPE,
+            Registries.BLOCK_ENTITY_TYPE,
             new Identifier(MOD_ID, "anemone"),
             FabricBlockEntityTypeBuilder
                     .create(AnemoneBlockEntity::new)
@@ -58,7 +59,7 @@ public class AnglingEntities {
     );
 
     public static final BlockEntityType<UrchinBlockEntity> URCHIN = Registry.register(
-            Registry.BLOCK_ENTITY_TYPE,
+            Registries.BLOCK_ENTITY_TYPE,
             new Identifier(MOD_ID, "urchin"),
             FabricBlockEntityTypeBuilder
                     .create(UrchinBlockEntity::new)
@@ -67,7 +68,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<FryEntity> FRY = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "fry"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(FryEntity::new)
@@ -79,7 +80,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<SunfishEntity> SUNFISH = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "sunfish"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(SunfishEntity::new)
@@ -91,7 +92,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<PelicanEntity> PELICAN = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "pelican"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(PelicanEntity::new)
@@ -103,7 +104,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<NautilusEntity> NAUTILUS = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "nautilus"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(NautilusEntity::new)
@@ -115,7 +116,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<SeaSlugEntity> SEA_SLUG = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "sea_slug"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(SeaSlugEntity::new)
@@ -127,7 +128,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<CrabEntity> CRAB = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "crab"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(CrabEntity::new)
@@ -139,7 +140,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<DongfishEntity> DONGFISH = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "dongfish"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(DongfishEntity::new)
@@ -151,7 +152,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<CatfishEntity> CATFISH = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "catfish"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(CatfishEntity::new)
@@ -163,7 +164,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<SeahorseEntity> SEAHORSE = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "seahorse"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(SeahorseEntity::new)
@@ -175,7 +176,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<BubbleEyeEntity> BUBBLE_EYE = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "bubble_eye"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(BubbleEyeEntity::new)
@@ -187,7 +188,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<AnomalocarisEntity> ANOMALOCARIS = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "anomalocaris"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(AnomalocarisEntity::new)
@@ -199,7 +200,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<AnglerfishEntity> ANGLERFISH = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "anglerfish"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(AnglerfishEntity::new)
@@ -211,7 +212,7 @@ public class AnglingEntities {
     );
 
     public static final EntityType<MahiMahiEntity> MAHI_MAHI = Registry.register(
-            Registry.ENTITY_TYPE,
+            Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "mahi_mahi"),
             FabricEntityTypeBuilder.createMob()
                     .entityFactory(MahiMahiEntity::new)

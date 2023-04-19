@@ -16,11 +16,11 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockRenderView;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +53,7 @@ public class RoeBlockEntity extends BlockEntity implements RenderAttachmentBlock
     }
 
     public void setEntityType(EntityType<?> entityType) {
-        this.entityType = Registry.ENTITY_TYPE.getId(entityType).toString();
+        this.entityType = Registries.ENTITY_TYPE.getId(entityType).toString();
     }
 
     public Optional<EntityType<?>> getEntityType() {

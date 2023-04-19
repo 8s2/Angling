@@ -8,13 +8,11 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
-import software.bernie.geckolib3.util.RenderUtils;
+import org.joml.Vector3d;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.util.RenderUtils;
 
 public class PelicanEntityRenderer extends BasicEntityRenderer<PelicanEntity> {
 
@@ -28,7 +26,7 @@ public class PelicanEntityRenderer extends BasicEntityRenderer<PelicanEntity> {
         entityRenderDispatcher = ctx.getRenderDispatcher();
         this.shadowRadius = 0.35f;
     }
-
+/*
     @Override
     public void renderEarly(PelicanEntity entity, MatrixStack stackIn, float ticks, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float tickDelta) {
         this.vertexConsumerProvider = renderTypeBuffer;
@@ -73,6 +71,6 @@ public class PelicanEntityRenderer extends BasicEntityRenderer<PelicanEntity> {
 
         super.renderRecursively(bone, stack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
-
+*/
 
 }

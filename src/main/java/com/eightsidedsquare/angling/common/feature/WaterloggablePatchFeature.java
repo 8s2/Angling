@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
@@ -33,7 +33,7 @@ public class WaterloggablePatchFeature extends Feature<SimpleBlockFeatureConfig>
             int dz = random.nextInt(range) - random.nextInt(range);
             int y = structureWorldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, blockPos.getX() + dx, blockPos.getZ() + dz);
             BlockPos blockPos2 = new BlockPos(blockPos.getX() + dx, y, blockPos.getZ() + dz);
-            BlockState state = ctx.getConfig().toPlace().getBlockState(random, blockPos2);
+            BlockState state = ctx.getConfig().toPlace().get(random, blockPos2);
             if (state.canPlaceAt(structureWorldAccess, blockPos2) &&
                     !structureWorldAccess.getBlockState(blockPos2.up()).isOf(Blocks.TALL_SEAGRASS) &&
                     !structureWorldAccess.getBlockState(blockPos2.down()).isIn(BlockTags.ICE)) {

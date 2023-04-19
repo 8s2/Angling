@@ -6,12 +6,12 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.LookTargetUtil;
-import net.minecraft.entity.ai.brain.task.Task;
+import net.minecraft.entity.ai.brain.task.MultiTickTask;
 import net.minecraft.server.world.ServerWorld;
 
 import java.util.stream.Stream;
 
-public class PelicanTradeTask extends Task<PelicanEntity> {
+public class PelicanTradeTask extends MultiTickTask<PelicanEntity> {
     public PelicanTradeTask() {
         super(ImmutableMap.of(
                 MemoryModuleType.WALK_TARGET, MemoryModuleState.VALUE_ABSENT,

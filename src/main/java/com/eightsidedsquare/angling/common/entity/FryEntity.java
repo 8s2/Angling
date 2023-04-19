@@ -25,19 +25,22 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
 
-public class FryEntity extends FishEntity implements IAnimatable {
+public class FryEntity extends FishEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.fry.idle");
+    private final RawAnimation flopAnimation = RawAnimation.begin().thenLoop("animation.fry.flop");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<Integer> COLOR;
     private static final TrackedData<Integer> AGE;
     private static final TrackedData<NbtCompound> VARIANT;
@@ -218,23 +221,27 @@ public class FryEntity extends FishEntity implements IAnimatable {
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        AnimationController<FryEntity> controller = new AnimationController<>(this, "controller", 2, this::controller);
-        animationData.addAnimationController(controller);
-    }
-
-    private PlayState controller(AnimationEvent<FryEntity> event) {
-        if(!touchingWater) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.fry.flop", true));
-        }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.fry.idle", true));
-        }
-        return PlayState.CONTINUE;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
+    }
+
+    private PlayState controller(AnimationState<FryEntity> state) {
+        if(!touchingWater) {
+            state.getController().setAnimation(flopAnimation);
+        }else {
+            state.getController().setAnimation(idleAnimation);
+        }
+        return PlayState.CONTINUE;
     }
 
     static {

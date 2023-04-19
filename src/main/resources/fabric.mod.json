@@ -8,7 +8,8 @@
   "authors": [
     "EightSidedSquare",
     "Diansu",
-    "Sillvia"
+    "Sillvia",
+    "byquanton"
   ],
   "contact": {
     "homepage": "https://eightsidedsquare.com/"
@@ -33,6 +34,9 @@
     ],
     "modmenu": [
       "com.eightsidedsquare.angling.config.ModMenuIntegration"
+    ],
+    "fabric-datagen": [
+      "com.eightsidedsquare.angling.core.AnglingDataGenerator"
     ]
   },
   "mixins": [
@@ -43,7 +47,7 @@
   "depends": {
     "fabricloader": ">=0.14.6",
     "fabric": "*",
-    "minecraft": "~1.19",
+    "minecraft": "1.19.4",
     "java": ">=17",
     "cloth-config2": ">=8.0.0"
   },

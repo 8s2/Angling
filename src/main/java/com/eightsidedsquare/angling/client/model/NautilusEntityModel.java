@@ -2,8 +2,8 @@ package com.eightsidedsquare.angling.client.model;
 
 import com.eightsidedsquare.angling.common.entity.NautilusEntity;
 import com.eightsidedsquare.angling.core.AnglingUtil;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
 
 public class NautilusEntityModel extends BasicEntityModel<NautilusEntity> {
     public NautilusEntityModel() {
@@ -11,13 +11,13 @@ public class NautilusEntityModel extends BasicEntityModel<NautilusEntity> {
     }
 
     @Override
-    public void setLivingAnimations(NautilusEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
+    public void setCustomAnimations(NautilusEntity animatable, long instanceId, AnimationState<NautilusEntity> animationState) {
         if(!AnglingUtil.isReloadingResources()) {
-            super.setLivingAnimations(entity, uniqueID, customPredicate);
-            IBone root = getAnimationProcessor().getBone("root");
-            if(!entity.isTouchingWater() && root != null) {
-                root.setRotationZ((float) (Math.PI / -2d));
-                root.setPositionY(-1.5f);
+            super.setCustomAnimations(animatable, instanceId, animationState);
+            CoreGeoBone root = getAnimationProcessor().getBone("root");
+            if(!animatable.isTouchingWater() && root != null) {
+                root.setRotZ((float) (Math.PI / -2d));
+                root.setPosY(-1.5f);
             }
         }
     }

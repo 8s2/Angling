@@ -21,7 +21,7 @@ public class AnglingMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if(mixinClassName.toLowerCase().contains("sodium")) {
+        if (mixinClassName.toLowerCase().contains("sodium")) {
             return FabricLoader.getInstance().isModLoaded("sodium");
         }
         return true;
