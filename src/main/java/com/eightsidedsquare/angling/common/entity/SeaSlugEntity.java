@@ -7,7 +7,11 @@ import com.eightsidedsquare.angling.core.AnglingBlocks;
 import com.eightsidedsquare.angling.core.AnglingItems;
 import com.eightsidedsquare.angling.core.AnglingSounds;
 import com.eightsidedsquare.angling.core.AnglingUtil;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Bucketable;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -35,15 +39,16 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class SeaSlugEntity extends WaterCreatureEntity implements IAnimatable, Bucketable {
+public class SeaSlugEntity extends WaterCreatureEntity implements Bucketable, GeoAnimatable {
 
     private static final TrackedData<SeaSlugPattern> PATTERN = DataTracker.registerData(SeaSlugEntity.class, SeaSlugPattern.TRACKED_DATA_HANDLER);
     private static final TrackedData<SeaSlugColor> BASE_COLOR = DataTracker.registerData(SeaSlugEntity.class, SeaSlugColor.TRACKED_DATA_HANDLER);
@@ -54,8 +59,10 @@ public class SeaSlugEntity extends WaterCreatureEntity implements IAnimatable, B
     private static final TrackedData<NbtCompound> MATE_DATA = DataTracker.registerData(SeaSlugEntity.class, TrackedDataHandlerRegistry.NBT_COMPOUND);
     private static final TrackedData<Integer> LOVE_TICKS = DataTracker.registerData(SeaSlugEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> LOVE_COOLDOWN = DataTracker.registerData(SeaSlugEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private final RawAnimation ambientAnimation = RawAnimation.begin().thenLoop("animation.sea_slug.ambient");
+    private final RawAnimation movingAnimation = RawAnimation.begin().thenLoop("animation.sea_slug.moving");
 
-    AnimationFactory factory = new AnimationFactory(this);
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     public SeaSlugEntity(EntityType<? extends WaterCreatureEntity> entityType, World world) {
         super(entityType, world);
@@ -244,22 +251,32 @@ public class SeaSlugEntity extends WaterCreatureEntity implements IAnimatable, B
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "ambient_controller", 0, this::ambientController));
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::controller));
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
     }
 
-    private PlayState ambientController(AnimationEvent<SeaSlugEntity> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.sea_slug.ambient", true));
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "ambient_controller", 0, this::ambientController));
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::controller));
+    }
+
+    private PlayState ambientController(AnimationState<SeaSlugEntity> event) {
+        event.getController().setAnimation(ambientAnimation);
         return PlayState.CONTINUE;
     }
 
-    private PlayState controller(AnimationEvent<SeaSlugEntity> event) {
+    private PlayState controller(AnimationState<SeaSlugEntity> event) {
         if(new Vec3d(getVelocity().getX(), 0, getVelocity().getZ()).length() > 0.005d) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.sea_slug.moving", true));
+            event.getController().setAnimation(movingAnimation);
             return PlayState.CONTINUE;
         }
-        event.getController().clearAnimationCache();
+        event.getController().forceAnimationReset();
         return PlayState.STOP;
     }
 
@@ -290,11 +307,6 @@ public class SeaSlugEntity extends WaterCreatureEntity implements IAnimatable, B
             setLoveTicks(getLoveTicks() - 1);
         }
         super.mobTick();
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
     }
 
     @Override

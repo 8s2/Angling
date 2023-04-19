@@ -7,23 +7,26 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.InstancedAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.Animation;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class UrchinBlockEntity extends BlockEntity implements IAnimatable {
+public class UrchinBlockEntity extends BlockEntity implements GeoAnimatable {
 
     private ItemStack hat = ItemStack.EMPTY;
-    AnimationFactory factory = new AnimationFactory(this);
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     public UrchinBlockEntity(BlockPos pos, BlockState state) {
         super(AnglingEntities.URCHIN, pos, state);
@@ -64,18 +67,24 @@ public class UrchinBlockEntity extends BlockEntity implements IAnimatable {
         return createNbt();
     }
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 0, this::controller));
-    }
 
-    private PlayState controller(AnimationEvent<UrchinBlockEntity> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.urchin.idle", true));
+    private PlayState controller(AnimationState<UrchinBlockEntity> state) {
+        state.getController().setAnimation(RawAnimation.begin().then("animation.urchin.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::controller));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return null;
+    }
+
+    @Override
+    public double getTick(Object o) {
+        return 0;
     }
 }

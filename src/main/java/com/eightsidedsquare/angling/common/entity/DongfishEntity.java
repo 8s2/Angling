@@ -4,6 +4,7 @@ import com.eightsidedsquare.angling.core.AnglingItems;
 import com.eightsidedsquare.angling.core.AnglingSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -17,17 +18,20 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class DongfishEntity extends FishEntity implements IAnimatable {
+public class DongfishEntity extends FishEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation flopAnimation = RawAnimation.begin().thenLoop("animation.dongfish.flop");
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.dongfish.idle");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     private static final TrackedData<Boolean> HAS_HORNGUS = DataTracker.registerData(DongfishEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public DongfishEntity(EntityType<? extends FishEntity> entityType, World world) {
@@ -40,7 +44,7 @@ public class DongfishEntity extends FishEntity implements IAnimatable {
         if(hasHorngus() && stack.isOf(Items.SHEARS)) {
             playSound(AnglingSounds.ENTITY_DONGFISH_SHEAR, 1, 1);
             setHasHorngus(false);
-            damage(DamageSource.player(player), 1);
+            damage(player.world.getDamageSources().playerAttack(player), 1);
             if(!player.getAbilities().creativeMode)
                 stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
             return ActionResult.success(world.isClient);
@@ -97,22 +101,27 @@ public class DongfishEntity extends FishEntity implements IAnimatable {
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 2, this::controller));
-    }
-
-    private PlayState controller(AnimationEvent<DongfishEntity> event) {
-        if(!touchingWater) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dongfish.flop", true));
-        }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dongfish.idle", true));
-        }
-        return PlayState.CONTINUE;
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
+    }
+
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    private PlayState controller(AnimationState<DongfishEntity> state) {
+        if(!touchingWater) {
+            state.getController().setAnimation(flopAnimation);
+        }else {
+            state.getController().setAnimation(idleAnimation);
+        }
+        return PlayState.CONTINUE;
     }
 
     @Override

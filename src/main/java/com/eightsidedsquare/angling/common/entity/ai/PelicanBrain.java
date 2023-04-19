@@ -33,6 +33,7 @@ public class PelicanBrain {
     }
 
     private static void addCoreActivities(Brain<PelicanEntity> brain) {
+        /*
         brain.setTaskList(Activity.CORE, 0, ImmutableList.of(
                 new StayAboveWaterTask(0.8F),
                 new WalkTask(2.5F),
@@ -40,9 +41,11 @@ public class PelicanBrain {
                 new WanderAroundTask(),
                 new UpdateAttackTargetTask<>(entity -> entity.getBrain().getOptionalMemory(MemoryModuleType.NEAREST_ATTACKABLE))
         ));
+         */
     }
 
     private static void addIdleActivities(Brain<PelicanEntity> brain) {
+        /*
         brain.setTaskList(Activity.IDLE, ImmutableList.of(
                 Pair.of(0, new UpdateAttackTargetTask<>(entity -> entity.getBrain().getOptionalMemory(MemoryModuleType.NEAREST_ATTACKABLE))),
                 Pair.of(1, new PelicanTradeTask()),
@@ -53,17 +56,23 @@ public class PelicanBrain {
                         Pair.of(new ConditionalTask<>(Entity::isOnGround, new WaitTask(5, 20)), 2),
                         Pair.of(new ConditionalTask<>(PelicanEntity::isFlying, new NoPenaltyStrollTask(1f)), 2))))
         ));
+
+         */
     }
 
     private static void addFightActivities(Brain<PelicanEntity> brain) {
+        /*
         brain.setTaskList(Activity.FIGHT,0, ImmutableList.of(
                 new ForgetAttackTargetTask<>(),
                 new RangedApproachTask(entity -> 1f),
                 new PelicanAttackTask(5)
         ), MemoryModuleType.ATTACK_TARGET);
+
+         */
     }
 
     private static void addSoarActivities(Brain<PelicanEntity> brain) {
+        /*
         brain.setTaskList(Activity.RIDE, ImmutableList.of(
                 Pair.of(0, new UpdateAttackTargetTask<>(entity -> entity.getBrain().getOptionalMemory(MemoryModuleType.NEAREST_ATTACKABLE))),
                 Pair.of(1, new PelicanEatTask()),
@@ -72,6 +81,8 @@ public class PelicanBrain {
                 Pair.of(AnglingMemoryModuleTypes.SOARING_COOLDOWN, MemoryModuleState.VALUE_ABSENT),
                 Pair.of(AnglingMemoryModuleTypes.CAN_TRADE, MemoryModuleState.VALUE_ABSENT))
         );
+
+         */
     }
 
     public static void updateActivities(PelicanEntity entity) {

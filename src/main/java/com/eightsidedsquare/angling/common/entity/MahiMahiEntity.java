@@ -12,20 +12,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class MahiMahiEntity extends FishEntity implements IAnimatable {
+public class MahiMahiEntity extends FishEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation flopAnimation = RawAnimation.begin().thenLoop("animation.mahi_mahi.flop");
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.mahi_mahi.idle");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     public MahiMahiEntity(EntityType<? extends FishEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    public static DefaultAttributeContainer.Builder createAttributes() {
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 10);
     }
 
     @Override
@@ -50,26 +57,27 @@ public class MahiMahiEntity extends FishEntity implements IAnimatable {
         return new ItemStack(AnglingItems.MAHI_MAHI_BUCKET);
     }
 
-    public static DefaultAttributeContainer.Builder createAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 10);
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 2, this::controller));
+    public double getTick(Object o) {
+        return 0;
     }
 
-    private PlayState controller(AnimationEvent<MahiMahiEntity> event) {
-        if(!touchingWater) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.mahi_mahi.flop", true));
-        }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.mahi_mahi.idle", true));
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
+    }
+
+    private PlayState controller(AnimationState<MahiMahiEntity> state) {
+        if (!touchingWater) {
+            state.getController().setAnimation(flopAnimation);
+        } else {
+            state.getController().setAnimation(idleAnimation);
         }
         return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
     }
 }

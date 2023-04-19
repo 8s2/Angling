@@ -1,12 +1,22 @@
 package com.eightsidedsquare.angling.client.particle;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.ParticleTextureSheet;
+import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class WormParticle extends SpriteBillboardParticle {
 
@@ -25,8 +35,8 @@ public class WormParticle extends SpriteBillboardParticle {
         float currentX = (float)(MathHelper.lerp(tickDelta, this.prevPosX, this.x) - vec3d.getX());
         float currentY = (float)(MathHelper.lerp(tickDelta, this.prevPosY, this.y) - vec3d.getY());
         float currentZ = (float)(MathHelper.lerp(tickDelta, this.prevPosZ, this.z) - vec3d.getZ());
-        Quaternion quaternion = Vec3f.POSITIVE_Y.getDegreesQuaternion(-camera.getYaw());
-        Quaternion flip = Vec3f.POSITIVE_Y.getDegreesQuaternion(180 - camera.getYaw());
+        Quaternionf quaternion = RotationAxis.POSITIVE_Y.rotationDegrees(-camera.getYaw());
+        Quaternionf flip = RotationAxis.POSITIVE_Y.rotationDegrees(180 - camera.getYaw());
 
         float size = this.getSize(tickDelta);
         float minU = this.getMinU();
@@ -39,19 +49,19 @@ public class WormParticle extends SpriteBillboardParticle {
         renderFace(vertexConsumer, flip, size, currentX, currentY, currentZ, minU, maxU, minV, maxV, light);
     }
 
-    private void renderFace(VertexConsumer vertexConsumer, Quaternion quaternion, float size, float x, float y, float z, float minU, float maxU, float minV, float maxV, int light) {
-        Vec3f[] vec3fs = new Vec3f[]{new Vec3f(-1.0F, -1.0F, 0.0F), new Vec3f(-1.0F, 1.0F, 0.0F), new Vec3f(1.0F, 1.0F, 0.0F), new Vec3f(1.0F, -1.0F, 0.0F)};
+    private void renderFace(VertexConsumer vertexConsumer, Quaternionf quaternion, float size, float x, float y, float z, float minU, float maxU, float minV, float maxV, int light) {
+        Vector3f[] vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
 
         for(int k = 0; k < 4; ++k) {
-            Vec3f vec3f2 = vec3fs[k];
+            Vector3f vec3f2 = vec3fs[k];
             vec3f2.rotate(quaternion);
-            vec3f2.scale(size);
+            vec3f2.mul(size);
             vec3f2.add(x, y, z);
         }
-        vertexConsumer.vertex(vec3fs[0].getX(), vec3fs[0].getY(), vec3fs[0].getZ()).texture(maxU, maxV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
-        vertexConsumer.vertex(vec3fs[1].getX(), vec3fs[1].getY(), vec3fs[1].getZ()).texture(maxU, minV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
-        vertexConsumer.vertex(vec3fs[2].getX(), vec3fs[2].getY(), vec3fs[2].getZ()).texture(minU, minV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
-        vertexConsumer.vertex(vec3fs[3].getX(), vec3fs[3].getY(), vec3fs[3].getZ()).texture(minU, maxV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
+        vertexConsumer.vertex(vec3fs[0].x(), vec3fs[0].y(), vec3fs[0].z()).texture(maxU, maxV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
+        vertexConsumer.vertex(vec3fs[1].x(), vec3fs[1].y(), vec3fs[1].z()).texture(maxU, minV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
+        vertexConsumer.vertex(vec3fs[2].x(), vec3fs[2].y(), vec3fs[2].z()).texture(minU, minV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
+        vertexConsumer.vertex(vec3fs[3].x(), vec3fs[3].y(), vec3fs[3].z()).texture(minU, maxV).color(this.red, this.green, this.blue, this.alpha).light(light).next();
     }
 
     @Override
@@ -69,7 +79,7 @@ public class WormParticle extends SpriteBillboardParticle {
             setVelocity(0, 0, 0);
         }
         super.tick();
-        if(!Block.isFaceFullSquare(world.getBlockState(new BlockPos(x, y - 0.5d, z)).getSidesShape(world, new BlockPos(x, y - 0.5d, z)), Direction.UP)) {
+        if(!Block.isFaceFullSquare(world.getBlockState(BlockPos.ofFloored(x, y - 0.5d, z)).getSidesShape(world, BlockPos.ofFloored(x, y - 0.5d, z)), Direction.UP)) {
             markDead();
         }
         setSpriteForAge(this.spriteProvider);

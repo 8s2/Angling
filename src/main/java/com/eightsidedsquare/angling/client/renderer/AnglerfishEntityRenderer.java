@@ -6,9 +6,10 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
-import software.bernie.geckolib3.renderers.geo.GeoLayerRenderer;
-import software.bernie.geckolib3.renderers.geo.IGeoRenderer;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
@@ -18,33 +19,27 @@ public class AnglerfishEntityRenderer extends GeoEntityRenderer<AnglerfishEntity
 
     public AnglerfishEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new BasicEntityModel<>("anglerfish", true));
-        addLayer(new AnglerfishLayerRenderer(this));
+        addRenderLayer(new AnglerfishLayerRenderer(this));
     }
 
     @Override
-    public RenderLayer getRenderType(AnglerfishEntity entity, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
-        return RenderLayer.getEntityTranslucent(getTextureResource(entity));
+    public RenderLayer getRenderType(AnglerfishEntity animatable, Identifier texture, VertexConsumerProvider bufferSource, float partialTick) {
+        return RenderLayer.getEntityTranslucent(getTextureLocation(animatable));
     }
 
-    static class AnglerfishLayerRenderer extends GeoLayerRenderer<AnglerfishEntity> {
+    static class AnglerfishLayerRenderer extends GeoRenderLayer<AnglerfishEntity> {
 
-        public AnglerfishLayerRenderer(IGeoRenderer<AnglerfishEntity> entityRendererIn) {
+        public AnglerfishLayerRenderer(GeoRenderer<AnglerfishEntity> entityRendererIn) {
             super(entityRendererIn);
         }
 
         @Override
-        public void render(MatrixStack matrixStackIn, VertexConsumerProvider bufferIn, int packedLightIn, AnglerfishEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        public void render(MatrixStack poseStack, AnglerfishEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
 
             int overlay = OverlayTexture.getUv(0,
-                    entity.hurtTime > 0 || entity.deathTime > 0);
+                    animatable.hurtTime > 0 || animatable.deathTime > 0);
 
-            this.getRenderer().render(this.getEntityModel().getModel(getEntityModel().getModelResource(entity)), entity, partialTicks, this.getRenderType(OVERLAY), matrixStackIn, bufferIn,
-                    bufferIn.getBuffer(this.getRenderType(OVERLAY)), LightmapTextureManager.MAX_LIGHT_COORDINATE, overlay, 1, 1, 1, 1);
-        }
-
-        @Override
-        public RenderLayer getRenderType(Identifier texture) {
-            return RenderLayer.getEntityCutoutNoCull(texture);
+            super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick, packedLight, overlay);
         }
     }
 }

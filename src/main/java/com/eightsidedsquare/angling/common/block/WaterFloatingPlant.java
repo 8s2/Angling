@@ -11,6 +11,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
 public class WaterFloatingPlant extends PlantBlock implements Fertilizable {
@@ -32,7 +33,7 @@ public class WaterFloatingPlant extends PlantBlock implements Fertilizable {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         for(Direction d : Direction.Type.HORIZONTAL) {
             BlockPos offsetPos = pos.offset(d).down();
             if(canPlantOnTop(world.getBlockState(offsetPos), world, offsetPos) && world.getBlockState(offsetPos.up()).isAir()) {

@@ -10,11 +10,11 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -23,6 +23,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class AlgaeBlock extends MultifaceGrowthBlock implements Waterloggable, F
 
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
@@ -51,12 +52,13 @@ public class AlgaeBlock extends MultifaceGrowthBlock implements Waterloggable, F
         return !context.getStack().isOf(Items.GLOW_LICHEN) || super.canReplace(state, context);
     }
 
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        return canGrow(world, pos, state);
-    }
-
     public boolean canGrow(BlockView world, BlockPos pos, BlockState state) {
         return state.get(WATERLOGGED) && Direction.stream().anyMatch((direction) -> this.grower.canGrow(state, world, pos, direction.getOpposite()));
+    }
+
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+        return canGrow(world, pos, state);
     }
 
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
@@ -151,7 +153,7 @@ public class AlgaeBlock extends MultifaceGrowthBlock implements Waterloggable, F
             double x = random.nextGaussian() + pos.getX();
             double y = random.nextGaussian() + pos.getY();
             double z = random.nextGaussian() + pos.getZ();
-            if(world.getBlockState(new BlockPos(x, y, z)).getFluidState().isIn(FluidTags.WATER)) {
+            if(world.getBlockState(BlockPos.ofFloored(x, y, z)).getFluidState().isIn(FluidTags.WATER)) {
                 double velocityX = random.nextGaussian() * 0.01d;
                 double velocityY = random.nextGaussian() * 0.01d;
                 double velocityZ = random.nextGaussian() * 0.01d;

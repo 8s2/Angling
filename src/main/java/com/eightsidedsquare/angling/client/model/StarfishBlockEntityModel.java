@@ -5,13 +5,18 @@ import com.eightsidedsquare.angling.common.entity.StarfishBlockEntity;
 import com.eightsidedsquare.angling.core.AnglingUtil;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3i;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.GeoModel;
 
 import java.util.Optional;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
-public class StarfishBlockEntityModel extends AnimatedGeoModel<StarfishBlockEntity> {
+public class StarfishBlockEntityModel extends GeoModel<StarfishBlockEntity> {
+
+    public StarfishBlockEntityModel() {
+    }
+
     @Override
     public Identifier getModelResource(StarfishBlockEntity object) {
         return new Identifier(MOD_ID, "geo/starfish.geo.json");
@@ -30,17 +35,17 @@ public class StarfishBlockEntityModel extends AnimatedGeoModel<StarfishBlockEnti
     }
 
     @Override
-    public void setLivingAnimations(StarfishBlockEntity entity, Integer uniqueID) {
+    public void setCustomAnimations(StarfishBlockEntity animatable, long instanceId, AnimationState<StarfishBlockEntity> animationState) {
         if(!AnglingUtil.isReloadingResources()){
-            super.setLivingAnimations(entity, uniqueID);
+            super.setCustomAnimations(animatable, instanceId, animationState);
             Optional.ofNullable(getAnimationProcessor().getBone("root")).ifPresent(bone -> {
-                Vec3i rotation = entity.getRotation();
-                bone.setRotationX((float) Math.toRadians(rotation.getX()));
-                bone.setRotationY((float) Math.toRadians(rotation.getY()));
-                bone.setRotationZ((float) Math.toRadians(rotation.getZ()));
+                Vec3i rotation = animatable.getRotation();
+                bone.setRotX((float) Math.toRadians(rotation.getX()));
+                bone.setRotY((float) Math.toRadians(rotation.getY()));
+                bone.setRotZ((float) Math.toRadians(rotation.getZ()));
             });
             Optional.ofNullable(getAnimationProcessor().getBone("starfish")).ifPresent(bone ->
-                    bone.setRotationY((float) entity.getRandomRotation()));
+                    bone.setRotZ((float) animatable.getRandomRotation()));
         }
     }
 }

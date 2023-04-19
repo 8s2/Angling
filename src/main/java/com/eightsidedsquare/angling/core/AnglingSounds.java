@@ -1,10 +1,11 @@
 package com.eightsidedsquare.angling.core;
 
 import com.google.common.collect.Lists;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.List;
 
@@ -64,11 +65,11 @@ public class AnglingSounds {
     public static final BlockSoundGroup SHELL_SOUND_GROUP = new BlockSoundGroup(1, 1.25f, BLOCK_SHELL_BREAK, BLOCK_SHELL_STEP, BLOCK_SHELL_PLACE, BLOCK_SHELL_HIT, BLOCK_SHELL_FALL);
 
     public static void init() {
-        SOUNDS.forEach(sound -> Registry.register(Registry.SOUND_EVENT, sound.getId(), sound));
+        SOUNDS.forEach(sound -> Registry.register(Registries.SOUND_EVENT, sound.getId(), sound));
     }
 
     private static SoundEvent create(String id) {
-        SoundEvent soundEvent = new SoundEvent(new Identifier(MOD_ID, id));
+        SoundEvent soundEvent = SoundEvent.of(new Identifier(MOD_ID, id));
         SOUNDS.add(soundEvent);
         return soundEvent;
     }

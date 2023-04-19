@@ -2,11 +2,11 @@ package com.eightsidedsquare.angling.client.model;
 
 import com.eightsidedsquare.angling.common.entity.UrchinBlockEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
-public class UrchinBlockEntityModel extends AnimatedGeoModel<UrchinBlockEntity> {
+public class UrchinBlockEntityModel extends GeoModel<UrchinBlockEntity> {
 
     @Override
     public Identifier getModelResource(UrchinBlockEntity object) {

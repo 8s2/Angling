@@ -19,19 +19,22 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Objects;
 
-public class SunfishEntity extends SchoolingFishEntity implements IAnimatable {
+public class SunfishEntity extends SchoolingFishEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.sunfish.idle");
+    private final RawAnimation flopAnimation = RawAnimation.begin().thenLoop("animation.sunfish.flop");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
 
     private static final TrackedData<SunfishVariant> VARIANT;
 
@@ -117,21 +120,27 @@ public class SunfishEntity extends SchoolingFishEntity implements IAnimatable {
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 2, this::controller));
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
     }
 
-    private PlayState controller(AnimationEvent<SunfishEntity> event) {
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
+    }
+
+    private PlayState controller(AnimationState<SunfishEntity> state) {
         if(!touchingWater) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.sunfish.flop", true));
+            state.getController().setAnimation(flopAnimation);
         }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.sunfish.idle", true));
+            state.getController().setAnimation(idleAnimation);
         }
         return PlayState.CONTINUE;
     }
 
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
-    }
 }

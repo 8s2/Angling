@@ -23,7 +23,7 @@ public class UrchinBucketItem extends BlockItem {
     protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
         if(player != null && !player.isCreative() && !player.giveItemStack(new ItemStack(Items.BUCKET)))
             player.dropItem(new ItemStack(Items.BUCKET), true);
-        world.createAndScheduleFluidTick(pos, world.getFluidState(pos).getFluid(), 1);
+        world.scheduleFluidTick(pos, world.getFluidState(pos).getFluid(), 1);
         if(world.getDimension().ultrawarm())
             world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
         return super.postPlacement(pos, world, player, stack, state);

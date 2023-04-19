@@ -18,12 +18,12 @@ import com.eightsidedsquare.angling.core.AnglingParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TropicalFishEntity;
@@ -33,11 +33,12 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.util.Color;
+import software.bernie.geckolib.core.object.Color;
 
 import static com.eightsidedsquare.angling.core.AnglingMod.MOD_ID;
 
 public class AnglingClient implements ClientModInitializer {
+
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
@@ -61,12 +62,12 @@ public class AnglingClient implements ClientModInitializer {
         EntityRendererRegistry.register(AnglingEntities.ANGLERFISH, AnglerfishEntityRenderer::new);
         EntityRendererRegistry.register(AnglingEntities.MAHI_MAHI, BasicEntityRenderer.create("mahi_mahi", true));
 
-        BlockEntityRendererRegistry.register(AnglingEntities.STARFISH, StarfishBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(AnglingEntities.ANEMONE, AnemoneBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(AnglingEntities.URCHIN, UrchinBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(AnglingEntities.STARFISH, StarfishBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(AnglingEntities.ANEMONE, AnemoneBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(AnglingEntities.URCHIN, UrchinBlockEntityRenderer::new);
         if(FabricLoader.getInstance().isModLoaded("sodium")) {
-            BlockEntityRendererRegistry.register(AnglingEntities.ROE, RoeBlockEntityRenderer::new);
-            BlockEntityRendererRegistry.register(AnglingEntities.SEA_SLUG_EGGS, SeaSlugEggsBlockEntityRenderer::new);
+            BlockEntityRendererFactories.register(AnglingEntities.ROE, RoeBlockEntityRenderer::new);
+            BlockEntityRendererFactories.register(AnglingEntities.SEA_SLUG_EGGS, SeaSlugEggsBlockEntityRenderer::new);
         }
 
         ColorProviderRegistry.BLOCK.register(RoeBlockEntity::getColor, AnglingBlocks.ROE);
@@ -84,7 +85,6 @@ public class AnglingClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(AnglingParticles.WORM, WormParticle.Factory::new);
 
         ModelPredicateProviderRegistry.register(AnglingItems.DONGFISH_BUCKET, new Identifier(MOD_ID, "has_horngus"), this::dongfishBucketItemHasHorngus);
-
     }
 
     private float dongfishBucketItemHasHorngus(ItemStack stack, ClientWorld clientWorld, LivingEntity livingEntity, int i) {

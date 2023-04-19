@@ -11,7 +11,14 @@ import com.eightsidedsquare.angling.core.tags.AnglingEntityTypeTags;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Bucketable;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.brain.Activity;
 import net.minecraft.entity.ai.brain.Brain;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
@@ -36,33 +43,41 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Unit;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
 
-public class PelicanEntity extends AnimalEntity implements IAnimatable {
+public class PelicanEntity extends AnimalEntity implements GeoAnimatable {
 
-    AnimationFactory factory = new AnimationFactory(this);
+    private final RawAnimation divingAnimation = RawAnimation.begin().thenLoop("animation.pelican.diving");
+    private final RawAnimation swimmingAnimation = RawAnimation.begin().thenLoop("animation.pelican.swimming");
+    private final RawAnimation flyingAnimation = RawAnimation.begin().thenLoop("animation.pelican.flying");
+    private final RawAnimation flappingAnimation = RawAnimation.begin().thenLoop("animation.pelican.flapping");
+    private final RawAnimation walkingAnimation = RawAnimation.begin().thenLoop("animation.pelican.walking");
+    private final RawAnimation idleAnimation = RawAnimation.begin().thenLoop("animation.pelican.idle");
+    private final RawAnimation beakOpened = RawAnimation.begin().thenLoop("animation.pelican.beak_opened");
+    AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
     protected static final ImmutableList<SensorType<? extends Sensor<? super PelicanEntity>>> SENSORS;
     protected static final ImmutableList<MemoryModuleType<?>> MEMORY_MODULES;
 
@@ -82,7 +97,7 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
         if(isBeakOpen() && stack.getItem() instanceof EntityBucketItem bucketItem) {
             bucketItem.playEmptyingSound(player, getWorld(), getBlockPos());
             NbtCompound nbt = stack.getOrCreateNbt().copy();
-            nbt.putString("id", Registry.ENTITY_TYPE.getId(bucketItem.entityType).toString());
+            nbt.putString("id", Registries.ENTITY_TYPE.getId(bucketItem.entityType).toString());
             if(nbt.contains("BucketVariantTag")) {
                 nbt.put("Variant", nbt.get("BucketVariantTag"));
                 nbt.remove("BucketVariantTag");
@@ -215,17 +230,12 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
         TagKey<EntityType<?>> tag = random.nextInt(5) == 0 ? AnglingEntityTypeTags.UNCOMMON_ENTITIES_IN_PELICAN_BEAK
                 : AnglingEntityTypeTags.COMMON_ENTITIES_IN_PELICAN_BEAK;
         EntityType<?> type = AnglingUtil.getRandomTagValue(world, tag, random);
-        nbt.putString("id", Registry.ENTITY_TYPE.getId(type).toString());
+        nbt.putString("id", Registries.ENTITY_TYPE.getId(type).toString());
         nbt.putBoolean("FromBucket", true);
         if(type.isIn(AnglingEntityTypeTags.HUNTED_BY_PELICAN_WHEN_BABY)) {
             nbt.putInt("Age", -24000);
         }
         return PelicanBeakEntityInitializer.getInitializer(type).initialize(nbt, random, world);
-    }
-
-    @Override
-    protected boolean hasWings() {
-        return !onGround;
     }
 
     @Override
@@ -305,7 +315,7 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
             }
         }
 
-        this.updateLimbs(this, false);
+        this.updateLimbs(false);
     }
 
     @Nullable
@@ -314,49 +324,55 @@ public class PelicanEntity extends AnimalEntity implements IAnimatable {
         return null;
     }
 
+
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "controller", 4, this::controller));
-        animationData.addAnimationController(new AnimationController<>(this, "beak_controller", 2, this::beakController));
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animatableInstanceCache;
+    }
+
+    @Override
+    public double getTick(Object o) {
+        return 0;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 2, this::controller));
+        controllerRegistrar.add(new AnimationController<>(this, "beak_controller", 2, this::beakController));
     }
 
     public boolean isFlying() {
         return getTimeOffGround() > 5;
     }
 
-    private PlayState controller(AnimationEvent<PelicanEntity> event) {
-        PelicanEntity entity = event.getAnimatable();
+    private PlayState controller(AnimationState<PelicanEntity> state) {
+        PelicanEntity entity = state.getAnimatable();
         if(entity.isDiving() && entity.isFlying()){
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.diving", true));
+            state.getController().setAnimation(divingAnimation);
         }else if(entity.isTouchingWater()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.swimming", true));
+            state.getController().setAnimation(swimmingAnimation);
         }else if(entity.isFlying()) {
             if (Math.abs(entity.getVelocity().y) > 0.05d) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.flying", true));
+                state.getController().setAnimation(flyingAnimation);
             } else {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.flapping", true));
+                state.getController().setAnimation(flappingAnimation);
             }
-        }else if(event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.walking", true));
+        }else if(state.isMoving()) {
+            state.getController().setAnimation(walkingAnimation);
         }else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.idle", true));
+            state.getController().setAnimation(idleAnimation);
         }
         return PlayState.CONTINUE;
     }
 
-    private PlayState beakController(AnimationEvent<PelicanEntity> event) {
-        PelicanEntity entity = event.getAnimatable();
+    private PlayState beakController(AnimationState<PelicanEntity> state) {
+        PelicanEntity entity = state.getAnimatable();
         if(entity.isBeakOpen()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.pelican.beak_opened", true));
+            state.getController().setAnimation(beakOpened);
             return PlayState.CONTINUE;
         }
-        event.getController().clearAnimationCache();
+        state.getController().forceAnimationReset();
         return PlayState.STOP;
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
     }
 
     @Override

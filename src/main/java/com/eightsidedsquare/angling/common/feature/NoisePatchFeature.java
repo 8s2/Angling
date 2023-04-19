@@ -4,18 +4,21 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 
 public class NoisePatchFeature extends Feature<NoisePatchFeatureConfig> {
 
     public NoisePatchFeature(Codec<NoisePatchFeatureConfig> configCodec) {
         super(configCodec);
     }
+
 
     @Override
     @SuppressWarnings("deprecation")
@@ -38,7 +41,7 @@ public class NoisePatchFeature extends Feature<NoisePatchFeatureConfig> {
                 BlockPos blockPos = pos.add(x, 0, z);
                 if(value > threshold) {
 
-                    BlockState state = blockStateProvider.getBlockState(random, blockPos);
+                    BlockState state = blockStateProvider.get(random, blockPos);
                     if(state.canPlaceAt(world, blockPos))
                         world.setBlockState(blockPos, state, Block.NOTIFY_LISTENERS);
                 }

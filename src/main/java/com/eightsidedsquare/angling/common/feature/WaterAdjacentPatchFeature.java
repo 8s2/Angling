@@ -1,7 +1,7 @@
 package com.eightsidedsquare.angling.common.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.tag.FluidTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.StructureWorldAccess;
