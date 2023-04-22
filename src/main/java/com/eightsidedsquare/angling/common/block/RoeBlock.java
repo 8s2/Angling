@@ -44,7 +44,7 @@ public class RoeBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {
-        return AnglingUtil.runningSodium() ? BlockRenderType.INVISIBLE : super.getRenderType(state);
+        return AnglingUtil.runningSodium() ? BlockRenderType.INVISIBLE : BlockRenderType.MODEL;
     }
 
     @Override
