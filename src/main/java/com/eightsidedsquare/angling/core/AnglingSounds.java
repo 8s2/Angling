@@ -55,8 +55,6 @@ public class AnglingSounds {
     public static final SoundEvent ENTITY_ANGLERFISH_HURT = create("entity.anglerfish.hurt");
     public static final SoundEvent ENTITY_ANGLERFISH_DEATH = create("entity.anglerfish.death");
     public static final SoundEvent ENTITY_ANGLERFISH_FLOP = create("entity.anglerfish.flop");
-    public static final SoundEvent ENTITY_URCHIN_HURT = create("entity.urchin.hurt");
-    public static final SoundEvent ENTITY_URCHIN_DEATH = create("entity.urchin.death");
     public static final SoundEvent ENTITY_MAHI_MAHI_HURT = create("entity.mahi_mahi.hurt");
     public static final SoundEvent ENTITY_MAHI_MAHI_DEATH = create("entity.mahi_mahi.death");
     public static final SoundEvent ENTITY_MAHI_MAHI_FLOP = create("entity.mahi_mahi.flop");
