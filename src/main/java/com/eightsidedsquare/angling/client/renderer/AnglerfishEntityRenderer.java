@@ -44,7 +44,7 @@ public class AnglerfishEntityRenderer extends GeoEntityRenderer<AnglerfishEntity
 
         @Override
         public RenderLayer getRenderType(Identifier texture) {
-            return RenderLayer.getEntityCutoutNoCull(texture);
+            return RenderLayer.getEntityTranslucent(texture);
         }
     }
 }
